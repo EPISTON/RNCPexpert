@@ -1,0 +1,13 @@
+partie gallerie:
+	benoit
+	jeremy
+	eric
+partie 1: (exclusion)
+	bertrand
+	abdoulaye
+	mathieu
+	marzouk
+Ordre:
+	berenice
+	christophe
+	

@@ -1,0 +1,30 @@
+﻿exercice amelioration gigagallerie
+
+1) facile/moyen
+filtrer les images qui ne sont pas taggés par les tags choisis
+
+select count(i.id) from Image as i,
+					IN(i.tags) ta1,
+					IN(i.tags) ta2 
+					WHERE ta1.id = :tp1
+					AND ta2.id = :tp2
+					AND NOT EXISTS (
+					select Image as i2, In (i2.tags as te1)
+					where (te1.id= :te1 or te1.id= :te2) and i2.id = i.id
+					)
+				
+
+
+2) moyen/difficile
+
+https://github.com/marceljuenemann/angular-drag-and-drop-lists
+
+gerer les galleries/collection d'images
+
+3) facile+
+
+gerer un ordre dans l'affichage
+	-> tag dans l'ordre alphabetique
+	-> image ordre de no, ou encore de date d'ajout
+	+ choix de l'ordre
+

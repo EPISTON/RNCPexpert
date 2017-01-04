@@ -1,0 +1,20 @@
+select count(i.id) from Image as i,
+					IN(i.tags) ta1
+					WHERE ta1.id = :tp1
+
+select DISTINCT i from Image as i left join fetch i.tags,
+					IN(i.tags) ta1
+					WHERE ta1.id = :tp1
+
+
+select count(i.id) from Image as i,
+					IN(i.tags) ta1,
+					IN(i.tags) ta2 
+					WHERE ta1.id = :tp1
+					AND ta2.id = :tp2
+					
+select DISTINCT i from Image as i left join fetch i.tags,
+					IN(i.tags) ta1,
+					IN(i.tags) ta2
+					WHERE ta1.id = :tp1
+					AND ta2.id = :tp2

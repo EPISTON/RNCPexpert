@@ -1,0 +1,7 @@
+ajouter dans path systeme
+
+C:\Users\Stagiaire\AppData\Local\Programs\Python\Python36-32\
+
+commande pour lancer serveur
+
+python -m http.server

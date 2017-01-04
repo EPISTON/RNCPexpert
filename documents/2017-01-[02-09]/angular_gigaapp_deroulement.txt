@@ -1,0 +1,16 @@
+je click sur un tag dans la barre de gauche (secondNavigation)
+
+1) appel la methode "addTag" du tagController
+2) le tagController vas appeler la méthode addTag du tagService
+3) le tagService fait ses traitements
+	-> il emet un evenement pour indique qu'un tag est selectionné
+		Broadcast
+
+le tagController ecoutait a l'evenement "tagSelected"
+4) rafraichir son affichage avec le nouveau tag selectionné
+
+le imageListController ecoute lui-aussi a "tagSelected"
+5) la liste des images est rafraichie e, fonction du nouveau tag selectionné
+	-> imageService
+	
+

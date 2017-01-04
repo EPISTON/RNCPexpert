@@ -1,0 +1,84 @@
+angular js
+
+acceder au module de l'application et déclarer controller, service, etc...
+angular.module("galerieApp")
+
+declarrer un controller
+	premier argument, nom du controller
+	deuxieme argument, un tableau avec
+		la liste des dependances a injecter
+		et en dernier, le fonction de démarrage du controller (qui prend les dependances)
+		
+		.controller("tagNavController",
+				['$rootScope', '$scope', 'tagService', '$uibModal', '$q',
+				function ($rootScope, $scope, tagService, $uibModal, $q) {
+
+dependances classiques:
+	$scope 
+	
+<div ng-controller="ctr1">
+	{{message}}				<------>  $scope.message = "toto"
+</div>
+
+hierarchie de scope
+$rootScope
+	|
+	+--$scope ctr1
+	|
+	|
+	+--$scope ctrl2
+		|
+		|
+		+------ $scope ctrl3
+
+pour declarer un service
+	.provider("nomservice", function () {
+
+        var configvalue = "value1";
+        this.setconfigvalue = function (v) {
+            configvalue = v;
+        };
+        
+
+        // cette fonction doit renvoyer le service
+        // correctment configuré
+        this.$get = function ($rootScope, $http, $cookies) {
+            return {
+
+                "f1": function (pageNo, pageSize) {
+					confivalue.ohhoh....
+                },
+             
+            };
+        }
+    })
+
+	
+surveiller la variable 'currentSearch' dans le scope
+si elle change, rappeler la fonction fournie
+
+$scope.$watch('currentSearch', function (newSearch, oldSearch) {
+}
+
+service courants
+$http -> envoyer requette ajax
+$cookies -> gerer les cookies
+$uibModal -> utiliser des boites de dialogue bootstrap
+Upload -> gere l'upload
+$q -> gestion de promesses
+$filter -> utiliser les filtres dans le code javascript
+
+
+evenements
+$broadcast -> envoyer un evenement vers les $scopes enfants
+$emit -> envoyer un evenement vers les $scopes parent
+
+ecouter un evenement
+$scope.$on('tagService:selectedTagRefreshed', function (evt, data) {
+}
+
+
+          
+
+
+
