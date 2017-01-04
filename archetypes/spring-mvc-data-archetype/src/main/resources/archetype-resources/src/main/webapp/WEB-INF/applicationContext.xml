@@ -1,0 +1,60 @@
+#set( $symbol_pound = '#' )
+#set( $symbol_dollar = '$' )
+#set( $symbol_escape = '\' )
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:aop="http://www.springframework.org/schema/aop"
+       xmlns:util="http://www.springframework.org/schema/util"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:tx="http://www.springframework.org/schema/tx"
+       xmlns:mvc="http://www.springframework.org/schema/mvc"
+	   xmlns:jpa="http://www.springframework.org/schema/data/jpa"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans 
+            http://www.springframework.org/schema/beans/spring-beans-4.0.xsd
+          http://www.springframework.org/schema/aop 
+            http://www.springframework.org/schema/aop/spring-aop-4.0.xsd
+          http://www.springframework.org/schema/util
+            http://www.springframework.org/schema/util/spring-util-4.0.xsd
+            http://www.springframework.org/schema/context
+			http://www.springframework.org/schema/context/spring-context-4.0.xsd
+			http://www.springframework.org/schema/tx
+           http://www.springframework.org/schema/tx/spring-tx-4.0.xsd
+           http://www.springframework.org/schema/mvc
+			http://www.springframework.org/schema/mvc/spring-mvc-4.0.xsd
+			http://www.springframework.org/schema/data/jpa
+			http://www.springframework.org/schema/data/jpa/spring-jpa.xsd"
+			default-autowire="byName">
+
+<bean class="org.springframework.orm.jpa.support.PersistenceAnnotationBeanPostProcessor"/>
+<jpa:repositories base-package="${package}.repositories"/>
+
+<context:property-placeholder location="classpath*:database.properties"/>
+
+<bean id="dataSource" 
+	  class="org.springframework.jdbc.datasource.DriverManagerDataSource">
+	  <property name="driverClassName" value="${symbol_dollar}{database.driverName}"/>
+	  <property name="url" value="${symbol_dollar}{database.url}"/>
+	  <property name="username" value="${symbol_dollar}{database.username}" />
+	  <property name="password" value="${symbol_dollar}{database.password}" />
+</bean>
+
+<bean 	id="entityManagerFactory"
+		class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean">
+		<property name="dataSource" ref="dataSource" />
+		<property name="jpaVendorAdapter">
+			<bean class="org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter">
+				<property name="database" value="${symbol_dollar}{database.typebase}" />
+				<property name="showSql" value="true" />
+			</bean>
+		</property>
+</bean>
+
+<bean 	id="transactionManager"
+		class="org.springframework.orm.jpa.JpaTransactionManager">
+		<property name="entityManagerFactory" ref="entityManagerFactory" />
+</bean>
+
+<tx:annotation-driven transaction-manager="transactionManager" />
+
+</beans>

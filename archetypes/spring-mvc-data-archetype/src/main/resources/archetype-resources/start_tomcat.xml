@@ -1,0 +1,13 @@
+#set( $symbol_pound = '#' )
+#set( $symbol_dollar = '$' )
+#set( $symbol_escape = '\' )
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="TomcatRunner" default="start" basedir="."> 
+	<target name="start">
+	  <exec executable="cmd" dir="${tomcatHome}${symbol_escape}bin">
+	    <arg value="/c"/>
+	    <arg value="startup.bat"/>
+	    <arg value="-p"/>
+	  </exec>
+	</target>	
+</project>
