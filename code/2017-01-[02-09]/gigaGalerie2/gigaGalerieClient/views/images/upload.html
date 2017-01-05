@@ -1,0 +1,36 @@
+<div class="row" ng-controller="imageUploadController">
+    <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6 col-xl-6">
+        <div ngf-drop ngf-select ng-model="files" class="upload-drop-box row" ngf-drag-over-class="'upload-dragover'" ngf-multiple="true"
+            ngf-allow-dir="true" accept="image/*" ngf-pattern="'image/*'">Drop images here to upload</div>
+        <div ngf-no-file-drop>File Drag/Drop is not supported for this browser</div>
+    </div>
+    <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6 col-xl-6">
+        <div ng-repeat="(name, progress) in fileProgressBars">
+            <uib-progressbar max="100" value="progress"><span style="color:white; white-space:nowrap;">{{name}} {{progress}}% </span></uib-progressbar>
+        </div>
+        <div>
+            <div uib-alert ng-repeat="alert in uploadAlerts" ng-class="'alert-' + (alert.type || 'warning')" dismiss-on-timeout="4000"
+                close="closeAlertUpload($index)">{{alert.message}}</div>
+        </div>
+    </div>
+    <div class="col-xs-12 cols-sm-12 col-md-12 col-lg-12 col-xl-12">
+        <h4>license of uploaded images</h4>
+        <div class="btn-group btn-block">
+            <button type="button" class="btn btn-default dropdown-toggle btn-block" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                {{currentLicense.name}}<span class="caret"></span>
+            </button>
+            <ul class="dropdown-menu btn-block">
+                <li ng-repeat="license in listeLicense"><a href="" ng-click="selectLicense(license)">{{license.name}}</a></li>
+            </ul>
+        </div>
+        <h4>source of uploaded images</h4>
+        <div class="btn-group btn-block">
+            <button type="button" class="btn btn-default dropdown-toggle btn-block" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                {{currentAssetSource.name}}<span class="caret"></span>
+            </button>
+            <ul class="dropdown-menu btn-block">
+                <li ng-repeat="assetSource in listeAssetSource"><a href="" ng-click="selectSource(assetSource)">{{assetSource.name}}</a></li>
+            </ul>
+        </div>
+    </div>
+</div>

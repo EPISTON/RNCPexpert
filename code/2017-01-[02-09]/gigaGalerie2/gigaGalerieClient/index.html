@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>Giga galerie</title>
+    <link href="css/vendor//bootstrap.css" rel="stylesheet">
+    <link href="css/vendor//bootstrapXL.css" rel="stylesheet">
+    <link href="css/sidebar.css" rel="stylesheet">
+    <link rel="stylesheet" href="css/vendor/angular-bootstrap-lightbox.css">
+    <link href="css/manager.css" rel="stylesheet">
+    <script src="js/vendor/jquery-2.1.4.js"></script>
+    <script src="js/vendor/bootstrap.js"></script>
+    <script src="js/vendor/angular.js"></script>
+    <script src="js/vendor/angular-sanitize.js"></script>
+    <script src="js/vendor/ng-file-upload.js"></script>
+    <script src="js/vendor/angular-cookies.js"></script>
+    <script src="js/vendor/angular-route.js"></script>
+    <script src="js/vendor/ui-bootstrap-tpls-2.3.0.js"></script>
+    <script src="js/vendor/angular-bootstrap-lightbox.js"></script>
+    <script src="js/vendor/angular-filter.js"></script>
+    <script src="js/galerieApp.js"></script>
+    <script src="js/directives/resizeDirective.js"></script>
+    <script src="js/services/imageService.js"></script>
+    <script src="js/services/tagService.js"></script>
+    <script src="js/services/licenseAndSourceService.js"></script>
+    <script src="js/controllers/imageControllers.js"></script>
+    <script src="js/controllers/tagControllers.js"></script>
+</head>
+
+<body ng-app="galerieApp">
+    <div id="wrapper" ng-controller="imageRootController">
+        <div id="sidebar-wrapper">
+            <ul class="sidebar-nav">
+                <li class="sidebar-brand sidebar-li">MAIN SECTIONS</li>
+                <li ng-class="{'active': isImageNav(0)}" class="sidebar-li"><a href="" ng-click="setImageNav(0)"><span class="glyphicon glyphicon-th" aria-hidden="true"> Images</a></li>
+                <li ng-class="{'active': isImageNav(1)}" class="sidebar-li"><a href="" ng-click="setImageNav(1)"><span class="glyphicon glyphicon-cloud-upload" aria-hidden="true"> Upload</a></li>
+                <li ng-class="{'active': isImageNav(2)}" class="sidebar-li"><a href="" ng-click="setImageNav(2)"><span class="glyphicon glyphicon-pushpin" aria-hidden="true"> Staging</a></li>
+                <ng-include src="secondNavigation" />
+            </ul>
+
+        </div>
+        <div id="page-content-wrapper">
+            <div class="page-content">
+                <div class="container-fluid" ng-include="mainImagePanel" />
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>

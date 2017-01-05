@@ -1,0 +1,44 @@
+<h2 class="page-header">Edit Image</h2>
+<div class="row placeholders" ng-controller="imageEditController">
+    <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6 col-xl-4" ng-if="editimg">
+        <div class="thumbnail">
+            <img ng-src="{{getImgLink(editimg.id)}}" class=".img-responsive"></img>
+        </div>
+    </div>
+    <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6 col-xl-8" ng-if="editimg">
+        <div class="input-group">
+            <span class="input-group-addon" id="name-addon">name</span>
+            <input type="text" class="form-control" placeholder="name" aria-describedby="name-addon" ng-model="editimg.name">
+        </div>
+        <div class="input-group">
+            <span class="input-group-addon" id="description-addon">description</span>
+            <textarea class="form-control" placeholder="description" aria-describedby="description-addon" ng-model="editimg.description"></textarea>
+        </div>
+        <div class="input-group">
+            <span class="input-group-addon" id="filename-addon">fileName</span>
+            <input type="text" class="form-control" placeholder="name" aria-describedby="filename-addon" ng-model="editimg.fileName">
+        </div>
+        <h4>license of image</h4>
+        <div class="btn-group btn-block">
+            <button type="button" class="btn btn-default dropdown-toggle btn-block" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                {{editimg.license.name}}<span class="caret"></span>
+            </button>
+            <ul class="dropdown-menu btn-block">
+                <li ng-repeat="license in listeLicense"><a href="" ng-click="selectLicense(license)">{{license.name}}</a></li>
+            </ul>
+        </div>
+        <h4>source of image</h4>
+        <div class="btn-group btn-block">
+            <button type="button" class="btn btn-default dropdown-toggle btn-block" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                {{editimg.source.name}}<span class="caret"></span>
+            </button>
+            <ul class="dropdown-menu btn-block">
+                <li ng-repeat="assetSource in listeAssetSource"><a href="" ng-click="selectSource(assetSource)">{{assetSource.name}}</a></li>
+            </ul>
+        </div>
+        <button ng-if="currentEditPoposeUnstaging" class="btn btn-primary" type="button" ng-click="saveUnstageImg()">Save and Unstage</button>
+        <button class="btn btn-primary" type="button" ng-click="saveImg()">Save</button>
+        <button class="btn btn-warning" type="button" ng-click="cancelEdit()">Cancel</button>
+    </div>
+    </ng-if>
+</div>

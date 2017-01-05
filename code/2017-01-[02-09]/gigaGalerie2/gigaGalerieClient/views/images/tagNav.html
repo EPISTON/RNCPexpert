@@ -1,0 +1,25 @@
+<span ng-controller="tagNavController">
+    <li class="sidebar-brand sidebar-li">SELECTED TAGS <span class="glyphicon glyphicon-tags"></span></li>
+<li ng-if="selectedTags.length == 0" class="smallnav sidebar-li"><a>no tags selected</a></li>
+<li class="btn-group btn-group-xs btn-group-justified" role="group" ng-repeat="tag in selectedTags">
+    <a type="button" class="btn btn-default btn-group">{{tag.libelle | truncate: 18 : '&hellip;'}}</a>
+    <a href="" type="button" style="width: .20%;" class="btn btn-warning btn-group" ng-click="removeTag(tag)"><span class="glyphicon glyphicon-arrow-down"></span> </a>
+</li>
+<li class="sidebar-brand sidebar-li">ALL TAGS <span class="glyphicon glyphicon-tags"></span></li>
+<div class="input-group input-group-sm">
+    <div class="input-group-btn btn-group-xs" role="group">
+        <button ng-click="openTagModal()" type="button" class="btn" ng-class="tagButtonClass"><span class="glyphicon" ng-class="tabButtonIcon"></span> </button>
+    </div>
+    <input type="text" class="form-control" placeholder="tagname" aria-describedby="tagSearch" ng-model="currentSearch" ng-model-options="{ debounce : 500 }">
+</div>
+<li ng-if="unselectedTags.length == 0" class="smallnav sidebar-li"><a>no tags found</a></li>
+<li uib-popover="{{tag.libelle + ': ' + tag.description}}" popover-placement="top-left" popover-trigger="'mouseenter'" popover-popup-delay="400"
+    class="btn-group btn-group-xs btn-group-justified" role="group" ng-repeat="tag in unselectedTags">
+    <a ng-click="setSearch(tag.libelle)" type="button" class="btn btn-default btn-group">{{tag.libelle | truncate: 18 : '&hellip;'}}</a>
+    <a type="button" style="width: .20%;" class="btn btn-success btn-group" ng-click="addTag(tag)"><span class="glyphicon glyphicon-arrow-up"></span> </a>
+</li>
+<div ng-show="unselectedTags.length > 0" class="text-center">
+    <ul uib-pagination total-items="totalItems" ng-model="pageNo" max-size="maxPaginationSize" class="pagination-sm" items-per-page="pageSize"
+        previous-text="&lsaquo;" next-text="&rsaquo;" ng-change="refreshAll()"></ul>
+</div>
+</span>

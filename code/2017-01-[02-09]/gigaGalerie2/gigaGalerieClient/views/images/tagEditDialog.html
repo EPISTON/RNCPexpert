@@ -1,0 +1,20 @@
+<div class="modal-header">
+    <h3 class="modal-title" id="modal-title">{{$ctrl.title}}</h3>
+</div>
+<div class="modal-body" id="modal-body">
+    <h4 ng-if="$ctrl.edittag.id != 0">previous name of tag is '{{$ctrl.currentTagName}}'</h4>
+    <div class="input-group">
+        <span class="input-group-addon" id="name-addon">name</span>
+        <input type="text" class="form-control" placeholder="name" aria-describedby="name-addon" ng-model="$ctrl.edittag.libelle">
+    </div>
+    <div class="input-group">
+        <span class="input-group-addon" id="description-addon">description</span>
+        <textarea class="form-control" placeholder="description" aria-describedby="description-addon" ng-model="$ctrl.edittag.description"></textarea>
+    </div>
+</div>
+<div class="modal-footer">
+    <button class="btn btn-primary" type="button" ng-click="$ctrl.ok()">Save</button>
+    <button class="btn btn-warning" type="button" ng-click="$ctrl.cancel()">Cancel</button>
+    <button class="btn btn-danger" type="button" ng-click="$ctrl.remove()">Delete</button>
+
+</div>

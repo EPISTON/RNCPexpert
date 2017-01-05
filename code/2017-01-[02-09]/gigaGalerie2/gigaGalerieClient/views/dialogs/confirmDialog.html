@@ -1,0 +1,10 @@
+<div class="modal-header">
+    <h3 class="modal-title" id="modal-title">{{$ctrl.modalConfig.title}}</h3>
+</div>
+<div class="modal-body" id="modal-body">
+    <p>{{$ctrl.modalConfig.message}}<br /> are you sure?</p>
+</div>
+<div class="modal-footer">
+    <button class="btn" ng-class="$ctrl.modalConfig.cancelClass" type="button" ng-click="$ctrl.cancel()">{{$ctrl.modalConfig.cancelLabel}}</button>
+    <button class="btn" ng-class="$ctrl.modalConfig.confirmClass" type="button" ng-click="$ctrl.confirm()">{{$ctrl.modalConfig.confirmLabel}}</button>
+</div>
