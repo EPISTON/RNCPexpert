@@ -12,8 +12,10 @@ import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 import javax.imageio.ImageIO;
 import javax.persistence.EntityManager;
@@ -34,6 +36,7 @@ import org.springframework.data.querydsl.QueryDslUtils;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.courtalon.gigaMvcGalerie.metier.Image;
+import com.courtalon.gigaMvcGalerie.utils.AssetQueryBuilder;
 import com.courtalon.gigaMvcGalerie.utils.FileStorageManager;
 
 import javassist.bytecode.ByteArray;
@@ -121,33 +124,35 @@ public class ImageRepositoryImpl implements ImageRepositoryCustom
 	@Transactional(readOnly=true)
 	public Page<Image> findByTagList(List<Integer> tagids, Pageable page, boolean includeTags) {
 		
+		List<Integer> includedTags = new ArrayList<>();
+		List<Integer> excludedTags = new ArrayList<>();
+		
+		for (Integer id : tagids) {
+			if (id > 0)
+				includedTags.add(id);
+			else
+				excludedTags.add(-id);
+		}
+
+	/*	List<Integer> includedTags = tagids.stream().filter(id -> id > 0)
+													.collect(Collectors.toList());
+		List<Integer> excludedTags = tagids.stream().filter(id -> id < 0)
+													.map(id -> -id)
+													.collect(Collectors.toList());
+		*/
+		
+		
 		String countRequest = "select count(i.id) from Image as i";
 		String pageRequest = "select DISTINCT i from Image as i";
 		if (includeTags)
 			pageRequest += " left join fetch i.tags";
 		
-		StringBuilder ejbstring = new StringBuilder("");
-		if (tagids != null && tagids.size() > 0)
-		{
-			int nb_params = tagids.size();
-			for (int i = 1; i <= nb_params; i++) {
-				ejbstring.append(", IN(i.tags) ta");
-				ejbstring.append(i);
-			}
-			ejbstring.append(" WHERE");
-			for (int i = 1; i <= nb_params; i++)
-			{
-				if (i > 1)
-					ejbstring.append(" AND");
-				ejbstring.append(" ta");
-				ejbstring.append(i);
-				ejbstring.append(".id = :tp");
-				ejbstring.append(i);
-			}
-		}
-		countRequest += ejbstring.toString();
-		pageRequest += ejbstring.toString();
-		
+		String dynamicQuery = AssetQueryBuilder.buildQuery("Image", "i",
+															includedTags.size(), excludedTags.size());
+		countRequest += dynamicQuery;
+		pageRequest += dynamicQuery;
+	
+
 		// ajout du tri si nécéssaire
 		if (page.getSort() != null && page.getSort().iterator().hasNext()) {
 			Order o = page.getSort().iterator().next();
@@ -163,13 +168,9 @@ public class ImageRepositoryImpl implements ImageRepositoryCustom
 		TypedQuery<Image> qData = em.createQuery(pageRequest, Image.class);
 		
 		// binding des parametres
-		int index_param = 1;
-		for (int tid : tagids)
-		{
-			qCount.setParameter("tp" + index_param, tid);
-			qData.setParameter("tp" + index_param, tid);
-			index_param++;
-		}
+		AssetQueryBuilder.bindQueryParams(qData, includedTags, excludedTags);
+		AssetQueryBuilder.bindQueryParams(qCount, includedTags, excludedTags);
+		
 		// sur la requette donnée, je fait la pagination
 		qData.setFirstResult(page.getOffset());
 		qData.setMaxResults(page.getPageSize());

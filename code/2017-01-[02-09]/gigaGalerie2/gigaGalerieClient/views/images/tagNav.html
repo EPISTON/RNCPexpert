@@ -2,7 +2,7 @@
     <li class="sidebar-brand sidebar-li">SELECTED TAGS <span class="glyphicon glyphicon-tags"></span></li>
 <li ng-if="selectedTags.length == 0" class="smallnav sidebar-li"><a>no tags selected</a></li>
 <li class="btn-group btn-group-xs btn-group-justified" role="group" ng-repeat="tag in selectedTags">
-    <a type="button" class="btn btn-default btn-group">{{tag.libelle | truncate: 18 : '&hellip;'}}</a>
+    <a type="button" ng-click="toggleTag(tag)" class="btn btn-default btn-group" ng-style="getSelectedStyle(tag)">{{tag.libelle | truncate: 18 : '&hellip;'}}</a>
     <a href="" type="button" style="width: .20%;" class="btn btn-warning btn-group" ng-click="removeTag(tag)"><span class="glyphicon glyphicon-arrow-down"></span> </a>
 </li>
 <li class="sidebar-brand sidebar-li">ALL TAGS <span class="glyphicon glyphicon-tags"></span></li>

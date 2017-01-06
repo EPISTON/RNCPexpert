@@ -10,22 +10,22 @@ angular.module("galerieApp")
  
         this.$get = function ($rootScope, $http, $timeout, $cookies, Upload) {
         // fonction privé
-            var generateIdsList = function(tagids) {
+            var generateIdsList = function(tags) {
                     var ids = "";
-                    for (var i = 0; i < tagids.length; i++) {
+                    for (var i = 0; i < tags.length; i++) {
                         if (i > 0) { ids += ","; }
-                        ids += tagids[i];
+                        ids += (tags[i].excluded ? -tags[i].id : tags[i].id);
                     }
                     return ids;
                 };
             return {
-                "filteredList": function (tagids, pageNo, pageSize, sortProperty, sortDirection) {
+                "filteredList": function (tags, pageNo, pageSize, sortProperty, sortDirection) {
                     var url = serviceUrl;
-                    if (!angular.isArray(tagids) || tagids.length == 0) {
+                    if (!angular.isArray(tags) || tags.length == 0) {
                         url += "/full";
                     }                  
                     else {
-                        url += "/tagSearchFull/" + generateIdsList(tagids);
+                        url += "/tagSearchFull/" + generateIdsList(tags);
                     }  
                     pageNo = pageNo || 0;
                     pageSize = pageSize || 12;
@@ -34,13 +34,13 @@ angular.module("galerieApp")
                     return $http.get(url + "?pageNo=" + pageNo + "&pageSize=" + pageSize
                                     + "&sort=" + sortProperty + "," + sortDirection);
                 },
-                "filteredStagedList": function (tagids, pageNo, pageSize, sortProperty, sortDirection) {
+                "filteredStagedList": function (tags, pageNo, pageSize, sortProperty, sortDirection) {
                     var url = serviceUrl;
-                    if (!angular.isArray(tagids) || tagids.length == 0) {
+                    if (!angular.isArray(tags) || tags.length == 0) {
                         url += "/stagedfull";
                     }                  
                     else {
-                        url += "/staged/tagSearchFull/" + generateIdsList(tagids);
+                        url += "/staged/tagSearchFull/" + generateIdsList(tags);
                     }  
                     pageNo = pageNo || 0;
                     pageSize = pageSize || 12;

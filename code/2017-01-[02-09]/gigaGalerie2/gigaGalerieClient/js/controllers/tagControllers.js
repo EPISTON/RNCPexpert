@@ -34,6 +34,26 @@ angular.module("galerieApp")
             tagService.refreshAll();
         });
 
+        $scope.getSelectedStyle = function (tag) {
+            if (tag.excluded) {
+                return {'background-color': 'pink'};
+            }
+            else {
+                return {'background-color': 'lightGreen'};
+            }
+        };
+
+        $scope.toggleTag = function (tag) {
+            if (tag.excluded) {
+                tag.excluded = false;
+            }
+            else {
+                tag.excluded = true;
+            }
+            $rootScope.$broadcast('tagService:selectedTagRefreshed', { 'tags': $scope.selectedTags});
+        };
+
+
         $scope.setSearch = function (libelle) {
             $scope.currentSearch = libelle;
         };

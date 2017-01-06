@@ -141,11 +141,12 @@ angular.module("galerieApp")
             $scope.refreshList = function () {
                 var ids = [];
                 // recuperation des tag pour filtrer
-                for (var i = 0; i < $scope.galleryPanelState.selectedTags.length; i++) {
+               /* for (var i = 0; i < $scope.galleryPanelState.selectedTags.length; i++) {
                     ids.push($scope.galleryPanelState.selectedTags[i].id);
-                }
+                }*/
                 // j'appele le service imageService pour recupere le liste des images
-                listServiceFct.call(imageService, ids,
+                listServiceFct.call(imageService, 
+                                    $scope.galleryPanelState.selectedTags,
                                      $scope.galleryPanelState.currentPage - 1,
                                       $scope.galleryPanelState.pageSize,
                                       $scope.galleryPanelState.currentSortProperty,
