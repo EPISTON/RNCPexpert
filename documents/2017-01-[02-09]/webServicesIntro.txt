@@ -1,0 +1,72 @@
+
+
+Principe service web
+
+	-> appeler une operation a distance via un protocole web
+
+avant webservices
+
+	java	-> java rmi (remote method invocation)
+	c/c++ 	-> corba, dcom
+
+unifier le standard pour permettre l'interaction quelques soit
+la technologie/langage
+
+utilisation des standard web
+	-> webservice (version initiale)
+
+utilisation du xml, et des schemas XML pour spécifier les structures des messages
+echangé et serialiser ceux-ci (transmission)
+
+XML choisi car parfaitement standardisé!
+comparaison XML <-> JSON
+	XML est un peu moins human readable
+		-> beaucoup plus facile a parser/lire pour une machine
+		-> outils de validation
+	JSON est plus lisible humainement
+		-> moins bien standardisé, moins facile a validé
+		-> bcp plus limité au niveau structure que le xml avec les schemas
+
+JSON -> simplicité
+SOAP -> completude/outils
+
+-------------------------------
+services web type XML
+
+WSDL -> web service description langage
+	-> decrire un service web (operations, types de messages, etc...)
+SOAP -> simple object access protocol
+	-> encodage des messages echangés
+
+Service Meteo
+	|
+	+---WSDL-+---getWeather
+			 |
+			 +---getForecast
+	
+getWeather  <--- SOAP ----> Client
+
+ces services ne force aucun protocole de communication
+		-> web service -> HTTP
+
+souvent HTTP -> interopérable -> port déjà ouvert
+ceci dit, HTTP + XML = verbeux et pas très efficace
+
+--------------------------------------
+en java
+
+jax-rs -> java rest service
+jax-ws -> java web service
+jaxb -> java xml binding (comme jackson, mais pour du xml)
+
+on peut ecrire "manuellement" avec ces librairies seulement un web service
+
+par exemple -> apache cxfon peut combiner apache cxf et spring, pour
+un maximum de facilités.
+
+
+
+
+
+
+
