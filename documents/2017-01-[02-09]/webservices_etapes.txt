@@ -1,0 +1,56 @@
+etape 1, ajout des dependences pour cxf dans le pom.xml
+
+<!-- dependence vers cxf ; librairie facilitant les webservices-->
+		<dependency>
+			<groupId>org.apache.cxf</groupId>
+			<artifactId>cxf-rt-frontend-jaxws</artifactId>
+			<version>3.0.10</version>
+		</dependency>
+		
+		<dependency>
+			<groupId>org.apache.cxf</groupId>
+			<artifactId>cxf-rt-transports-http</artifactId>
+			<version>3.0.10</version>
+		</dependency>
+		
+etape 2, ajouter la servlet dans le web.xml, avant celle de spring mvc
+
+  <servlet>
+  	<servlet-name>cxf</servlet-name>
+  	<servlet-class>org.apache.cxf.transport.servlet.CXFServlet</servlet-class>
+  	<load-on-startup>1</load-on-startup>
+  </servlet>
+  <servlet-mapping>
+  	<servlet-name>cxf</servlet-name>
+  	<url-pattern>/services/*</url-pattern>
+  </servlet-mapping>
+		
+etape 3 dans l'en tete du fichier applicationContext.xml
+
+ajouter 
+
+ xmlns:cxf="http://cxf.apache.org/jaxws"
+ 
+et 
+		http://cxf.apache.org/jaxws
+		http://cxf.apache.org/schemas/jaxws.xsd
+		
+
+etape 4
+ensuite, une fois les classes/interfaces du service creer
+
+<!--  detecter les services annotés dans ce package -->
+
+<context:component-scan base-package="com.courtalon.firstWebServiceForm.webservices" />
+
+<!-- importer la configuration apache cxf -->
+
+<import resource="classpath:META-INF/cxf/cxf.xml"/>
+<import resource="classpath:META-INF/cxf/cxf-servlet.xml"/>
+
+<!-- declaration de publication de notre web service -->
+
+<cxf:endpoint implementor="com.courtalon.firstWebServiceForm.webservices.SalutationServiceImpl"
+			 address="/salutationService" />
+			 
+			 
