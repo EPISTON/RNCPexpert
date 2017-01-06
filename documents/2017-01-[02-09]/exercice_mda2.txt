@@ -1,0 +1,15 @@
+
+Produit
+-------
+id
+nom
+prix
+poids
+
+
+fournir un service web permettant
+1) de lister les produits
+2) de consulter un produit
+3) de supprimer un produit
+bonus
+4) de creer un produit
