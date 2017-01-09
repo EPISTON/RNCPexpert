@@ -1,5 +1,7 @@
 package com.courtalon.firstWebServiceForm.webservices;
 
+import java.util.stream.Collectors;
+
 import javax.jws.WebService;
 
 import org.springframework.beans.factory.annotation.Autowired;
