@@ -1,0 +1,14 @@
+1)
+creer un service expedition (dans un nouveau projet): 
+--------------------------
+
+Paris, Londre, New york, berlin, Stockholm
+
+tarifExpedition(String ville, double poids) -> tarif
+
+2)
+ajouter dans le service produit une fonction expedition (projet existant)
+
+expedition(int id, int quantite, String destination)
+	-> prix total pour cette expedition
+
