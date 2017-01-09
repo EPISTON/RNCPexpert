@@ -26,23 +26,14 @@
 			http://cxf.apache.org/schemas/jaxws.xsd"
 			default-autowire="byName">
 
-<context:component-scan base-package="com.courtalon.BoutiqueServiceForm.webservices" />
-
-<!-- importer la configuration apache cxf -->
-
-<import resource="classpath:META-INF/cxf/cxf.xml"/>
-<import resource="classpath:META-INF/cxf/cxf-servlet.xml"/>
-
-<cxf:endpoint implementor="com.courtalon.BoutiqueServiceForm.webservices.ProduitServiceImpl"
-			  address="ProduitService" />
-
-<cxf:client serviceClass="com.courtalon.lightspeedtransport.ExpeditionService"
-			address="http://localhost:8080/ExpeditionPereNoel/services/expeditionService"
-			id="expeditionService" />
-
+<context:component-scan base-package="com.courtalon.ExpeditionPereNoel.webservices" />
+<import resource="classpath:META-INF/cxf/cxf.xml" />
+<import resource="classpath:META-INF/cxf/cxf-servlet.xml" />	
+<cxf:endpoint implementor="com.courtalon.ExpeditionPereNoel.webservices.ExpeditionPereNoelService"
+			  address="/expeditionService" />
 
 <bean class="org.springframework.orm.jpa.support.PersistenceAnnotationBeanPostProcessor"/>
-<jpa:repositories base-package="com.courtalon.BoutiqueServiceForm.repositories"/>
+<jpa:repositories base-package="com.courtalon.ExpeditionPereNoel.repositories"/>
 
 <context:property-placeholder location="classpath*:database.properties"/>
 

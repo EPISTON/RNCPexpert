@@ -1,9 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?><project-modules id="moduleCoreId" project-version="1.5.0">
-  <wb-module deploy-name="BoutiqueServiceForm">
-        <dependent-module archiveName="lightspeedtransport-1.0.0-SNAPSHOT.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/lightspeedtransport/lightspeedtransport">
-            <dependency-type>uses</dependency-type>
-        </dependent-module>
-    <property name="context-root" value="BoutiqueServiceForm"/>
+  <wb-module deploy-name="ExpeditionPereNoel">
+    <property name="context-root" value="ExpeditionPereNoel"/>
     <property name="java-output-path" value="/target/classes"/>
     <wb-resource deploy-path="/WEB-INF/classes" source-path="src/main/java"/>
     <wb-resource deploy-path="/WEB-INF/classes" source-path="src/main/resources"/>

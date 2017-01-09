@@ -26,5 +26,8 @@ public interface ProduitService {
 
 	@WebMethod
 	Produit sauverProduit(@WebParam(name="produit") Produit produit);
-
+	
+	@WebMethod
+	double expedierProduit(@WebParam(name="id") int id, @WebParam(name="ville")String ville, @WebParam(name="quantite") int quantite);
+	
 }
