@@ -40,7 +40,12 @@
 <cxf:endpoint implementor="com.courtalon.firstWebServiceForm.webservices.SalutationServiceImpl"
 			 address="/salutationService" />
 
-
+<cxf:client
+	id="produitService" 
+	address="http://localhost:8080/BoutiqueServiceForm/services/ProduitService"
+	serviceClass="com.courtalon.BoutiqueServiceForm.webservices.ProduitService" />
+	
+	
 <bean class="org.springframework.orm.jpa.support.PersistenceAnnotationBeanPostProcessor"/>
 <jpa:repositories base-package="com.courtalon.firstWebServiceForm.repositories"/>
 
