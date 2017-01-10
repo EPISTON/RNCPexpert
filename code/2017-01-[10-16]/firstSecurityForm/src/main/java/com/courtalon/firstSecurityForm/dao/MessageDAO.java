@@ -46,6 +46,16 @@ public class MessageDAO implements RowMapper<Message>
 	 *  
 	 */
 	public int saveMessage(Message msg) {
+		
+		/*
+		 * vulnerable
+		 * 1)
+		 * "pawned', corps='leet' where id=2 -- " --> edite un autre message
+		 * 2)
+		 * "', corps=(select password from utilisateurs where login='admin') where id=3 -- "
+		 * --> recupere le mot de passe d'admin dans le corps du message
+		 * 
+		 */
 		String requette = "update message set titre='" +msg.getTitre() 
 										+ "', corps='" + msg.getCorps()
 										+ "' where id=" + msg.getId();

@@ -52,6 +52,7 @@ public class IndexController {
 		return "edit";
 	}
 	
+	
 	@RequestMapping(value="/save", method=RequestMethod.POST)
 	public String save(@ModelAttribute("message") Message message) {
 		getMessageDAO().saveMessage(message);
