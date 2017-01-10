@@ -8,6 +8,7 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -16,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.courtalon.firstSecurityForm.dao.MessageDAO;
+import com.courtalon.firstSecurityForm.metier.Message;
 
 @Controller
 @RequestMapping(value="/")
@@ -44,6 +46,17 @@ public class IndexController {
 		return "listeRecherche";
 	}
 
+	@RequestMapping(value="/edit/{id:[0-9]+}", method=RequestMethod.GET)
+	public String editMessage(Model model, @PathVariable(value="id") int id) {
+		model.addAttribute("message", getMessageDAO().findByID(id));
+		return "edit";
+	}
+	
+	@RequestMapping(value="/save", method=RequestMethod.POST)
+	public String save(@ModelAttribute("message") Message message) {
+		getMessageDAO().saveMessage(message);
+		return "redirect:/search";
+	}
 	
 	
 

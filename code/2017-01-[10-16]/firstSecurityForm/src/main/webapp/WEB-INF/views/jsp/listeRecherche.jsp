@@ -12,13 +12,14 @@
 <body>
 <h2>recherche de message</h2>
 <table border="1">
-	<tr><th>ID</th><th>TITRE</th><th>CORPS</th><th>PUBLISHED</th></tr>
+	<tr><th>ID</th><th>TITRE</th><th>CORPS</th><th>PUBLISHED</th><th>actions</th></tr>
 	<c:forEach items="${messages}" var="m" >
 	<tr>
 		<td>${m.id}</td>
 		<td>${m.titre}</td>
 		<td>${m.corps}</td>
 		<td>${m.published}</td>
+		<td><a href="edit/${m.id}">editer</a></td>
 	</tr>
 	</c:forEach>
 </table>

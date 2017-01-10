@@ -26,9 +26,33 @@ public class MessageDAO implements RowMapper<Message>
 	 * 
 	 */
 	public List<Message> findByTitre(String searchTerm) {
-		String  requette = "select * from message where titre like '%" + searchTerm + "%' and published=true";
-		return getJdbcTemplate().query(requette, this);
+		// vulnerable -> "%' OR 1=1 -- "
+		/*String  requette = "select * from message where titre like '%" + searchTerm + "%' and published=true";
+		return getJdbcTemplate().query(requette, this);*/
+		
+		String requette = "select * from message where titre like ? and published=true";
+		
+		String param = "%" + searchTerm + "%";
+		return getJdbcTemplate().query(requette, new Object[]{param}, this);
 	}
+	
+	public Message findByID(int id) {
+		return getJdbcTemplate().queryForObject("select * from message where id=?", this, id);
+	}
+	
+	/*
+	 * exemple
+	 * update message set titre='toto', corps='toto est la' where id=2
+	 *  
+	 */
+	public int saveMessage(Message msg) {
+		String requette = "update message set titre='" +msg.getTitre() 
+										+ "', corps='" + msg.getCorps()
+										+ "' where id=" + msg.getId();
+		return getJdbcTemplate().update(requette);
+	}
+	
+	
 	
 	@Override
 	public Message mapRow(ResultSet rs, int pos) throws SQLException {
