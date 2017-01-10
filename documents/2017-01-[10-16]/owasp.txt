@@ -1,0 +1,102 @@
+Open web application security project
+
+OWASP
+-----------------------
+top 10 vulnerabilité
+	- injection sql
+	- authentification et session
+	- cross site scripting
+	- direct object reference (fichier)
+	- mauvaise configuration
+	- donnee sensible et cryptage
+	- controle d'accès au fonction
+	- cross site request
+	- composant tiers -> librairies
+	- redirect/forward non validé
+	
+pillier de OWASP (pratique et guide)
+
+	- C: confidentiality -> uniquement accès aux données a ceux qui en ont le droit
+	- I: integrity -> s'assurer que les données ne sont pas altérées par des utilisateur
+	non authorisés
+	- A: Availability -> s'assurer que les données et fonctions sont disponnibles aux
+	utilisateurs qui en ont besoin
+	
+	
+----------------
+question a se poser lors du developpement/conception/architecture
+
+1) le processus d'une fonctionnalité est il aussi sécurisé que possible (autrement
+dit, le processus n'est il pas lui-même défaillant)
+2) si j'etait mal intentionné, comment pourrais je exploité une fonctionnalité
+3) est ce qu'une fonctionnalité est nécéssaire par défaut, sinon comment limiter
+son accès
+
+la sécurité démarre des la collecte des besoins, à la conception, au développement, et
+jusqu'a la fin de vie du produit
+
+-----------------------
+principe a suivre
+
+1) minimiser la surface d'attaque
+exemple, site web avec une aide en ligne. fournit on une fonction de recherche ?
+potentiellement vulnérable. doit elle être accessible a tout le monde.
+Un "repertoire/index" ou FAQ serait peut être suffisant
+
+2) principe de moindre privilege
+nous avons un compte admin pour gere les droits/sur le site. Ce compte à t'il
+besoin du droit de passer des encheres/de les modifier.
+cela s'applique aussi au librairies programmes
+si j'ai un service web dont le seul role est de renvoyer des données de la base
+pas d'accès réseau...
+
+3) sécurisation des valeur par défaut
+exemple: mot de passe
+par defaut, obliger un mot de passe avec n caracteres, et au moins des chiffres/minuscules/etc..
+uniquement si c'est autorisé et demande par un utilisateur, relaxer ces contraintes.
+
+4) principe de la défense en profondeur
+avoir plusieurs mecanisme de défense/sécurité, dans l'idéal fonctionnant différement.
+une interface administratice est potentiellement défaillante. Limiter son accès au réseau local.
+
+5) fail securely (erreur sécurisé)
+isAdmin = true;
+try {
+	fonctionErreur()
+	isAdmin = code....
+}
+catch(){}
+
+6) systeme externe sont défaillant
+pas de confiance implicite dans des systeme externe
+ex:
+	- un systeme de gestion de point de fidélité
+	- un systeme d'upload, de cache....
+	
+7)  séparation de responsabilité
+celui qui passe commande de materiel n'est pas celui qui le réceptionne
+
+8) ne pas compter sur la sécurité par le secret
+la sécurité par le secret est utile, masi non suffisante
+il ne faut pas compter sur celle-ci pour se proteger
+
+9) chercher la simplicité
+un systeme simple est plus facile à sécuriser
+
+10) corriger correctement les probleme de sécurité
+une fois un probleme identifier, mettre en place un test automatique
+pour celui-ci, et comprendre la cause fondamentale de celui-ci
+
+
+
+
+
+
+
+
+
+
+
+
+
+

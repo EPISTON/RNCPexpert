@@ -53,4 +53,9 @@ ensuite, une fois les classes/interfaces du service creer
 <cxf:endpoint implementor="com.courtalon.firstWebServiceForm.webservices.SalutationServiceImpl"
 			 address="/salutationService" />
 			 
-			 
+
+-------------------------------------------------
+\												\
+\		mise en place du contrat dan librairie	\
+\												\
+-------------------------------------------------
