@@ -4,6 +4,7 @@ import java.util.Date;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -14,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.client.HttpClientErrorException;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.courtalon.firstSecurityForm.dao.MessageDAO;
@@ -54,13 +56,21 @@ public class IndexController {
 
 	@RequestMapping(value="/edit/{id:[0-9]+}", method=RequestMethod.GET)
 	public String editMessage(Model model, @PathVariable(value="id") int id) {
-		model.addAttribute("message", getMessageDAO().findByID(id));
+		Message msg = getMessageDAO().findByID(id);
+		if (!msg.isPublished()) {
+			throw new HttpClientErrorException(HttpStatus.NOT_FOUND, "message non trouvé");
+		}
+		model.addAttribute("message", msg);
 		return "edit";
 	}
 	
 	
 	@RequestMapping(value="/save", method=RequestMethod.POST)
 	public String save(@ModelAttribute("message") Message message) {
+		Message m = getMessageDAO().findByID(message.getId());
+		if (m == null || !m.isPublished()) {
+			throw new HttpClientErrorException(HttpStatus.NOT_FOUND, "message non trouvé");
+		}
 		getMessageDAO().saveMessage(message);
 		return "redirect:/search";
 	}

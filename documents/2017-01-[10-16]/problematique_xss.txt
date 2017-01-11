@@ -1,0 +1,38 @@
+boutique
+	-> vente de produits
+	-> utilisateurs peuvent poster des commentaires
+	sur un produit
+	
+boutique affiche, de temps en temps, un ou plusieurs
+produits sur sa page d'acceuil pour les mettre en avant
+(avec les commentaires)
+
+-> pas de controle/validation sur le contenu des
+ commentaires
+
+pour un navigateur, tout le contenu de la page est
+du html -> le navigateur ne fait pas la différence
+entre le contenu d'un commentaire et la 'structure' de 
+la page
+
+si, dans un champ, j'injecte du code html, il sera a 
+l'affichage par le navigateur interprété comme le reste de la page
+
+moins grave ---> plus grave
+	-> casser la mise en page
+	-> rediriger l'utilisateur sur un autre site
+	-> utiliser le navigateur du client comme relais
+	-> vols d'information (session, cookie, information sur la page)
+
+echapper les caracteres spéciaux html
+	-> : <>'" -> &lt; &gt; &quote; ...
+probleme, il se peut que vous vouliez autorisé un formattage limité
+	->
+		1) on utilise un moteur de templating
+		2) on utilise un sanitiseur HTML
+		
+		
+
+
+
+
