@@ -52,14 +52,18 @@ public class MessageDAO implements RowMapper<Message>
 		 * 1)
 		 * "pawned', corps='leet' where id=2 -- " --> edite un autre message
 		 * 2)
-		 * "', corps=(select password from utilisateurs where login='admin') where id=3 -- "
+		 * "mdp', corps=(select password from utilisateurs where login='admin') where id=3 -- "
 		 * --> recupere le mot de passe d'admin dans le corps du message
+		 * update message set titre='mdp',
+		 * corps=(select password from utilisateurs where login='admin')
+		 *  where id=3 --  ', corps='blabla' ' where id=3
 		 * 
 		 */
-		String requette = "update message set titre='" +msg.getTitre() 
-										+ "', corps='" + msg.getCorps()
-										+ "' where id=" + msg.getId();
-		return getJdbcTemplate().update(requette);
+		//String requette = "update message set titre='" +msg.getTitre() 
+		//								+ "', corps='" + msg.getCorps()
+		//								+ "' where id=" + msg.getId();
+		String requette = "update message set titre=?, corps=? where id=?";
+		return getJdbcTemplate().update(requette, msg.getTitre(), msg.getCorps(), msg.getId());
 	}
 	
 	
