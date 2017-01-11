@@ -18,6 +18,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.courtalon.firstSecurityForm.dao.MessageDAO;
 import com.courtalon.firstSecurityForm.metier.Message;
+import com.courtalon.firstSecurityForm.repositories.MessageRepository;
 
 @Controller
 @RequestMapping(value="/")
@@ -30,6 +31,11 @@ public class IndexController {
 	public MessageDAO getMessageDAO() {return messageDAO;}
 	public void setMessageDAO(MessageDAO messageDAO) {this.messageDAO = messageDAO;}
 
+	@Autowired
+	private MessageRepository messageRepository;
+	public MessageRepository getMessageRepository() {return messageRepository;}
+	public void setMessageRepository(MessageRepository messageRepository) {this.messageRepository = messageRepository;}
+	
 	@RequestMapping(value = "/search",method=RequestMethod.GET)
 	public String recherche() {
 		return "recherche";
@@ -41,8 +47,8 @@ public class IndexController {
 	public String listeRecherche(Model model, @RequestParam(name="searchTerm") String searchTerm) {
 		log.info("recherche avec le terme:" + searchTerm);
 		
-		model.addAttribute("messages", getMessageDAO().findByTitre(searchTerm));
-		
+		//model.addAttribute("messages", getMessageDAO().findByTitre(searchTerm));
+		model.addAttribute("messages", getMessageRepository().findsecureByTitre(searchTerm));
 		return "listeRecherche";
 	}
 

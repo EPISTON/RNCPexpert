@@ -8,7 +8,7 @@ import org.springframework.data.repository.PagingAndSortingRepository;
 import com.courtalon.firstSecurityForm.metier.Message;
 
 public interface MessageRepository 
-		extends PagingAndSortingRepository<Message, Integer> {
+		extends PagingAndSortingRepository<Message, Integer>, MessageRepositoryCustom {
 
 	Page<Message> findByTitreContaining(String titre, Pageable p);
 }
