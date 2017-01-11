@@ -3,6 +3,9 @@ package com.courtalon.secondSecurityForm.web;
 import java.util.Date;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import org.owasp.html.AttributePolicy;
+import org.owasp.html.HtmlPolicyBuilder;
+import org.owasp.html.PolicyFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -75,6 +78,16 @@ public class IndexController {
 			throw new HttpClientErrorException(HttpStatus.NOT_FOUND, "message non trouvé");
 		}
 		
+		
+		PolicyFactory filtre = new HtmlPolicyBuilder()
+									.allowElements("b", "i", "ul", "li")
+									.allowAttributes("class").onElements("ul","li")
+									.allowAttributes("id").matching(true, "id1", "id2").onElements("b")
+									.toFactory();
+		
+		message.setTitre(filtre.sanitize(message.getTitre()));
+		message.setCorps(filtre.sanitize(message.getCorps()));
+		
 		/*
 		message.setTitre(message.getTitre().replaceAll("<", "&lt;")
 			 .replaceAll(">", "&gt;")
@@ -85,8 +98,9 @@ public class IndexController {
 				 .replaceAll("\"", "&quot;")
 				 .replaceAll("'", "&apos;"));
 		*/
-		message.setTitre(HtmlSanitizer.sanitize(message.getTitre()));
-		message.setCorps(HtmlSanitizer.sanitize(message.getCorps()));
+		//message.setTitre(HtmlSanitizer.sanitize(message.getTitre()));
+		//message.setCorps(HtmlSanitizer.sanitize(message.getCorps()));
+		
 		getMessageDAO().saveMessage(message);
 		return "redirect:/search";
 	}
