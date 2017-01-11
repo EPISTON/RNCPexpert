@@ -21,6 +21,7 @@ import org.springframework.web.servlet.ModelAndView;
 import com.courtalon.secondSecurityForm.dao.MessageDAO;
 import com.courtalon.secondSecurityForm.metier.Message;
 import com.courtalon.secondSecurityForm.repositories.MessageRepository;
+import com.courtalon.secondSecurityForm.utils.HtmlSanitizer;
 
 
 
@@ -73,6 +74,19 @@ public class IndexController {
 		if (m == null || !m.isPublished()) {
 			throw new HttpClientErrorException(HttpStatus.NOT_FOUND, "message non trouvé");
 		}
+		
+		/*
+		message.setTitre(message.getTitre().replaceAll("<", "&lt;")
+			 .replaceAll(">", "&gt;")
+			 .replaceAll("\"", "&quot;")
+			 .replaceAll("'", "&apos;"));
+		message.setCorps(message.getCorps().replaceAll("<", "&lt;")
+				 .replaceAll(">", "&gt;")
+				 .replaceAll("\"", "&quot;")
+				 .replaceAll("'", "&apos;"));
+		*/
+		message.setTitre(HtmlSanitizer.sanitize(message.getTitre()));
+		message.setCorps(HtmlSanitizer.sanitize(message.getCorps()));
 		getMessageDAO().saveMessage(message);
 		return "redirect:/search";
 	}
