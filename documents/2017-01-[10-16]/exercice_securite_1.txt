@@ -1,0 +1,33 @@
+exercice security 1
+-------------------
+
+ecrire une petite application web Blog
+
+------->
+Post
+-----
+id
+titre
+corps
+published
+
+Auteur
+------
+id
+nom
+email
+
+Post n)------(1 Auteur
+
+
+permettre les operations CRUD sur les post, la recherche de post par titre
+en securisant pour les injections SQL
+le corps des posts autorise un formatage minimal
+	-> texte en gras, en italique
+	-> ol et li
+	bonus (autorise les img uniquement si src en provenance d'un site choisi)
+
+on ne peut pas editer ou voire un post non publié
+
+
+
