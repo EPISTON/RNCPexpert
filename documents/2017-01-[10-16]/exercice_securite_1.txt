@@ -29,5 +29,5 @@ le corps des posts autorise un formatage minimal
 
 on ne peut pas editer ou voire un post non publié
 
-
+https://github.com/OWASP/java-html-sanitizer
 
