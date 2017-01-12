@@ -1,0 +1,57 @@
+Spring security
+	-> ensemble de librairie pour gérer la sécurité via spring
+	
+a l'origine, librairie séparée "acegi security"
+ensuite
+directement intégré au librairies centrales de spring ("spring security")
+version 3.x et apres
+
+1)
+	spring-security-core
+2)
+	spring-security-web  -> securité des applications web
+3)
+	spring-security-config -> configuration facilité de spring security
+4)
+	modules supplementaires
+		-> ldap : pour authentification via ldap
+		-> openId : authentification OpenID (oAuth)
+		-> plein d'autres protocoles d'authentification
+5) spring-security-taglibs
+	-> librairie de balise pour spring-security
+
+
+dependances (pom.xml)
+	
+		<dependency>
+		    <groupId>org.springframework.security</groupId>
+		    <artifactId>spring-security-core</artifactId>
+		    <version>4.1.0.RELEASE</version>
+		</dependency>
+		
+		<dependency>
+		    <groupId>org.springframework.security</groupId>
+		    <artifactId>spring-security-web</artifactId>
+		    <version>4.1.0.RELEASE</version>
+		</dependency>
+		
+		<dependency>
+		    <groupId>org.springframework.security</groupId>
+		    <artifactId>spring-security-config</artifactId>
+		    <version>4.1.0.RELEASE</version>
+		</dependency>
+		
+------------------
+
+spring security -> filtre dans le web.xml
+	delagating-filter (qui servira de point d'entrée au filtre de spring security)
+	
+------------------
+2 partie basique a configurer
+	--> authentification (qui etes vous)
+	--> auhtorisation (a quoi avez vous le droit)
+	
+
+
+
+
