@@ -4,6 +4,7 @@ import javax.sql.DataSource;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.security.authentication.encoding.PlaintextPasswordEncoder;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
@@ -17,6 +18,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 	@Autowired
 	private DataSource dataSource;
 	
+	@Autowired
+	private MyPasswordEncoder myPasswordEncoder;
+	
 	@Override
 	protected void configure(AuthenticationManagerBuilder auth) throws Exception {
 		auth.jdbcAuthentication()
@@ -27,8 +31,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 					+ " inner join utilisateur_role ur on u.id = ur.utilisateur_id "
 					+ " inner join role r on r.id = ur.role_id"
 					+ " where u.username=?")
-			.dataSource(dataSource);
-		
+			.dataSource(dataSource)
+			.passwordEncoder(myPasswordEncoder);
 	}
 
 	@Override
