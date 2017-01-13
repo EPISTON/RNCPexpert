@@ -1,0 +1,5 @@
+copier un archetype existant
+	-> renommer le répertoire
+	-> changer le nom du projet dans pom.xml et .project 
+	
+-> ouvrir dans eclipse et personnaliser
