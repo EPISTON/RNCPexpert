@@ -1,0 +1,95 @@
+spring-security
+	-> stockage en mémoire (non recommandé)
+
+	-> stockage en base de donnée
+	-> stockage dédiée (ldap, etc...)
+	
+1) stockage en base de donnée
+
+	spring security est fournis avec un "back-end" de gestion de compte JDBC
+	une certaine structure de table
+		-> on peu personnaliser les requettes exécutée
+	losque l'on choisi ce systeme, il faudra aussi configurer le stockage
+	des mots de passe
+	En effet, stocker les mot de passe tel quel n'est une bonne pratique
+	
+	On peut enfin fournir notre propre mécanisme de stockage de compte/mot de
+	passe, ce que l'on fera pour JPA
+	
+2) structure "attendue"
+
+pour la table User
+	-> username
+	-> password
+	-> enabled
+	
+pour la table role
+	-> role				exemple: "ROLE_ADMIN", "ROLE_USER", etc...
+	
+user n)-----(n role
+
+
+-----------------------------------------------------------
+hashage de mot de passe
+
+admin : admin 		--> MD5 --> 21232f297a57a5a743894a0e4a801fc3
+vincent: toto1234 	--> MD5 --> 910b92df4bd6ebe00f74f7d48148c55c
+bob: toto1235		--> MD5 --> 20bf6a260317ccaa9714550f854628e5
+patrick: toto1234  	--> MD5 --> 910b92df4bd6ebe00f74f7d48148c55c
+plus tard...
+
+admin 		--> MD5	--> 21232f297a57a5a743894a0e4a801fc3
+
+rainbow table
+	-> base de mot de passe avec le hash MD5, SHA, ETC
+
+eviter ce probleme
+
+on va utiliser ce qu'on appel le "salt":
+	on assaisone le mot de passe
+
+choix un salt pour mon site web: 07c3492408
+	
+admin : admin + 07c3492408		--> MD5 --> 11dbbd3dce672c22983db7cf072113b8
+vincent: toto1234 + 07c3492408 	--> MD5 --> 5f2b970a87ba88e30237339ffad7bb98
+bob: toto1235 + 07c3492408		--> MD5 --> c59711c6aa88d3aac7f91a1cb9b88d7f
+patrick: toto1234 + 07c3492408 	--> MD5 --> 5f2b970a87ba88e30237339ffad7bb98
+
+avec ce principe, plus le probleme des rainbow table
+
+ca ne regle pas le probleme de détection des mots de passes identiques
+dans le même site
+
+-> si le mot de passe est compromis ailleurs (autre site), cela impacte
+ceux qui on utilisé le même mot de passe
+-> on peu facilement détecter les mots de passe simple les plus usuels,
+car leur hash apparait de manière récurrente dans la base
+
+----------------------------
+un assaisonnement individuel
+
+choix un salt pour mon site web: 07c3492408
+	
+vincent: toto1234 + 07c3492408 + 92408	--> MD5 --> 00aa1db3c419edcf8a1b6e06d5be03fa
+patrick: toto1234 + 07c3492408 + 07c34	--> MD5 --> 322d7c1e496e6c0b5ea8201375b5d284
+
+rajouter une colonne -> stockage du salt
+
+-----------------------------
+alourdir le calcul
+	-> augmenter les iterations
+
+le choix de l'algorithme
+	-> MD5  -> NE PAS l'UTILISER (obsolete)
+	-> SHA1,2,256 ->plus solide que MD5, largement plus couteux
+
+exemple en ligne
+http://www.miraclesalad.com/webtools/md5.php
+
+
+
+
+
+
+
+	
