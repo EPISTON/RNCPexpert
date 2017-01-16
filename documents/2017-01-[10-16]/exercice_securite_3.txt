@@ -1,0 +1,18 @@
+exercice securite no 3
+--------------------------
+
+reprendre l'application blog
+
+1) transformer l'entite Auteur pour qu'elle puisse servir
+de compte utilisateur
+2) permettre de se logguer/s'enregistrer sur le blog
+3) securiser le blog
+	-> on ne peu acceder a la liste des posts que si on est loggué
+4) lorsque l'on soumet un nouveau post, l'associer automatiquement
+a l'auteur loggé
+
+Bonus)
+ ne permettre d'editer que les posts que l'on a ecrit
+ 
+ si on est admin (role)
+ on peut tout editer
