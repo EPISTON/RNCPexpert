@@ -20,11 +20,14 @@ public class DatabaseInitialiser implements ApplicationListener<ContextRefreshed
 	@Autowired
 	private RoleRepository roleRepository;
 	
+	@Autowired
+	private MyPasswordEncoder myPasswordEncoder;
+	
 	@Override
 	public void onApplicationEvent(ContextRefreshedEvent arg0) {
 		if (utilisateurRepository.count() == 0) {
 			// la base est vide, creons les utilisateurs de base
-			BCryptPasswordEncoder pe = new BCryptPasswordEncoder();
+			//BCryptPasswordEncoder pe = new BCryptPasswordEncoder();
 			
 			Role r1 = new Role(0, "ROLE_ADMIN");
 			Role r2 = new Role(0, "ROLE_USER");
@@ -37,12 +40,12 @@ public class DatabaseInitialiser implements ApplicationListener<ContextRefreshed
 			Utilisateur u1 = new Utilisateur(0,
 											"admin",
 											"admin@admin.org",
-											pe.encode("admin"),
+											myPasswordEncoder.encode("admin"),
 											true);
 			Utilisateur u2 = new Utilisateur(0,
 					"patrick",
 					"patrick@admin.org",
-					pe.encode("toto1234"),
+					myPasswordEncoder.encode("toto1234"),
 					true);
 			// admin a les 2 roles
 			u1.getRoles().add(r1);
