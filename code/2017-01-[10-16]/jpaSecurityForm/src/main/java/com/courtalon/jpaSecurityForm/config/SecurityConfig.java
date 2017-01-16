@@ -7,6 +7,7 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
 import com.courtalon.jpaSecurityForm.utils.MyPasswordEncoder;
 
@@ -34,9 +35,10 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 									.hasRole("ADMIN")
 								.antMatchers("/user/**")
 									.hasRole("USER")
-								.antMatchers("/public/**", "/", "/login")
+								.antMatchers("/public/**", "/", "/login", "/logout")
 									.permitAll().and()
-								.logout().logoutUrl("/logout")
+								.logout().logoutRequestMatcher(new AntPathRequestMatcher("/logout", "GET"))
+								//.logoutUrl("/logout")
 										 .logoutSuccessUrl("/public/")
 										 .and()
 								.formLogin().loginPage("/public/login")

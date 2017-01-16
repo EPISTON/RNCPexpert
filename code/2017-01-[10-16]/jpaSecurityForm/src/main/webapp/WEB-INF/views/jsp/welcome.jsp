@@ -13,7 +13,7 @@
 </head>
 <body>
 <s:url value="/logout" var="logoutUrl" />
-<sf:form action="${logoutUrl}" method="post">
+<sf:form action="${logoutUrl}" method="get">
 	<input type="submit" value="se delogguer" />
 </sf:form>
 
