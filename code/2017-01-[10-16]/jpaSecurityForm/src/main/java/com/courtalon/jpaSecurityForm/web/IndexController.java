@@ -116,7 +116,7 @@ public class IndexController {
 			}
 			
 			int nbSpecial = 0;
-			Matcher m2 = passwordPattern1.matcher(password);
+			Matcher m2 = passwordPattern2.matcher(password);
 			pos = 0;
 			while(m2.find(pos)) {
 				nbSpecial++;
