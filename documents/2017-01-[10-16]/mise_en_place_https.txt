@@ -1,0 +1,23 @@
+on genere un certificat
+exemple
+C:\Program Files\Java\jdk1.8.0_111\bin>keytool -genkey -alias vincentkey -keyalg RSA -keystore c:\vincentks
+
+utiliser le même mot de passe pour le keystore et le certificat
+
+mettre a jour server.xml de tomcat avec:
+
+<Connector port="8443" protocol="org.apache.coyote.http11.Http11NioProtocol"
+		   maxThreads="150" SSLEnabled="true" scheme="https" secure="true"
+		   clientAuth="false" sslProtocol="TLS"
+			keystoreFile="C:\cle\vincentks"
+			keystorePass="toto1234"
+		   />
+		   
+redémarrer tomcat -> https est disponnible sur le port 8443
+
+attention, notre certificat n'est pas signé par une autorité de confiance
+les navigateurs n'y font pas confiance par défaut
+
+par exemple sur chrome on peu mettre
+chrome://flasgs/#allow-insecure-localhost 
+pour autoriser ca sur les adresse locales
