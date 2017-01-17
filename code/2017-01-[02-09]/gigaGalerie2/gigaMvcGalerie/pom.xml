@@ -70,6 +70,33 @@
 		    <version>${jackson.version}</version>
 		</dependency>
 		
+			<!-- spring security -->
+		
+		<dependency>
+		    <groupId>org.springframework.security</groupId>
+		    <artifactId>spring-security-core</artifactId>
+		    <version>4.1.0.RELEASE</version>
+		</dependency>
+		
+		<dependency>
+		    <groupId>org.springframework.security</groupId>
+		    <artifactId>spring-security-web</artifactId>
+		    <version>4.1.0.RELEASE</version>
+		</dependency>
+		
+		<dependency>
+		    <groupId>org.springframework.security</groupId>
+		    <artifactId>spring-security-config</artifactId>
+		    <version>4.1.0.RELEASE</version>
+		</dependency>
+		
+		<!-- librairie de nettoyage et filtrage du html  -->
+		<dependency>
+		    <groupId>com.googlecode.owasp-java-html-sanitizer</groupId>
+		    <artifactId>owasp-java-html-sanitizer</artifactId>
+		    <version>20160422.1</version>
+		</dependency>
+		
 		<!-- autres dependances -->
 		<dependency>
 			<groupId>org.aspectj</groupId>

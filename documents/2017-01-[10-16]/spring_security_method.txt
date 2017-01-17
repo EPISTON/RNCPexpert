@@ -1,0 +1,20 @@
+
+controle au niveau des methodes (via de l'aop)
+
+@Secured -> version obsolete
+	-> devant une methode, en lui indiquant une liste de roles
+
+@PreAuthorize, @PostAuthorize
+	-> devant une methode, cela prend une spring expression en parametre
+	
+------------------
+pour activer
+(dans securityConfig)
+@EnableGlobalMethodSecurity(prePostEnabled=true)
+
+on peut appliquer cette securité au niveau que l'on souhaite
+(pas uniquement pour les controleurs)
+
+attention, les contraintes de l'AOP s'appliquent
+
+

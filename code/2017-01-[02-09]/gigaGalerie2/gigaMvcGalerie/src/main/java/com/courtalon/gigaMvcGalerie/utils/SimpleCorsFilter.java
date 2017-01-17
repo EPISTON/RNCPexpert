@@ -37,6 +37,8 @@ public class SimpleCorsFilter extends GenericFilterBean {
 	        response.setHeader("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Range, Content-Disposition, Content-Type, Authorization, X-CSRF-TOKEN, X-XSRF-TOKEN");  
 	        response.setHeader("Access-Control-Allow-Credentials", "true");
 	        
+	        // si on a une requette OPTIONS
+	        // Je reponds OK sans même passer a la suite
 	        if ("OPTIONS".equalsIgnoreCase(request.getMethod())) {
 	            response.setStatus(HttpServletResponse.SC_OK);
 	        } else {

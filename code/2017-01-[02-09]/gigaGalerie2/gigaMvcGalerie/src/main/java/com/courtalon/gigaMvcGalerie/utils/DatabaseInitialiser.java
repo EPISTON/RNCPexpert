@@ -16,11 +16,16 @@ import org.springframework.context.event.ContextRefreshedEvent;
 
 import com.courtalon.gigaMvcGalerie.metier.AssetSource;
 import com.courtalon.gigaMvcGalerie.metier.LicenseType;
+import com.courtalon.gigaMvcGalerie.metier.Role;
 import com.courtalon.gigaMvcGalerie.metier.Tag;
+import com.courtalon.gigaMvcGalerie.metier.Utilisateur;
 import com.courtalon.gigaMvcGalerie.repositories.AssetSourceRepository;
 import com.courtalon.gigaMvcGalerie.repositories.ImageRepository;
 import com.courtalon.gigaMvcGalerie.repositories.LicenseTypeRepository;
+import com.courtalon.gigaMvcGalerie.repositories.RoleRepository;
 import com.courtalon.gigaMvcGalerie.repositories.TagRepository;
+import com.courtalon.gigaMvcGalerie.repositories.UtilisateurRepository;
+
 
 // cette classe sera appelée au démarrage du contexte spring
 // doit etre soit annoté, soit déclarée dans le fichier de configuration de spring
@@ -42,8 +47,19 @@ public class DatabaseInitialiser implements ApplicationListener<ContextRefreshed
 	@Autowired
 	private FileStorageManager fileStorageManager;
 	
+	@Autowired
+	private UtilisateurRepository utilisateurRepository;
+	@Autowired
+	private RoleRepository roleRepository;
+	
+	@Autowired
+	private MyPasswordEncoder myPasswordEncoder;
+	
 	@Override
 	public void onApplicationEvent(ContextRefreshedEvent evt) {
+		if (roleRepository.count() == 0) {
+			initAccounts();
+		}
 		if (licenseTypeRepository.count() == 0) {
 			log.info("base seems empty. initializing data");
 			initTags();
@@ -53,6 +69,32 @@ public class DatabaseInitialiser implements ApplicationListener<ContextRefreshed
 			log.info("licenses found");
 	}
 
+	private void initAccounts() {
+		Role r1 = new Role(0, "ROLE_ADMIN");
+		Role r2 = new Role(0, "ROLE_USER");
+		r1 = roleRepository.save(r1);
+		r2 = roleRepository.save(r2);
+		
+		Utilisateur u1 = new Utilisateur(0,
+										"admin",
+										"admin@admin.org",
+										myPasswordEncoder.encode("admin"),
+										true);
+		Utilisateur u2 = new Utilisateur(0,
+				"patrick",
+				"patrick@admin.org",
+				myPasswordEncoder.encode("toto1234"),
+				true);
+		
+		// admin a les 2 roles
+		u1.getRoles().add(r1);
+		u1.getRoles().add(r2);
+		// patrick est seulement utilisateur
+		u2.getRoles().add(r2);
+		
+		utilisateurRepository.save(u1);
+		utilisateurRepository.save(u2);
+	}
 	
 	private void initAssets() {
 		log.info("inserting basic license types....");
