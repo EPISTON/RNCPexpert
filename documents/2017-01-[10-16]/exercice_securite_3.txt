@@ -16,3 +16,10 @@ Bonus)
  
  si on est admin (role)
  on peut tout editer
+
+ 
+ ----------------------
+ spring security expression langage
+ 
+ http://docs.spring.io/autorepo/docs/spring-security/4.2.x/reference/html/el-access.html
+ 
