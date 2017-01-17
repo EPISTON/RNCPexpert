@@ -12,7 +12,9 @@ app.constant("serverUrl", "http://localhost:8080/gigaMvcGalerie")
 
 // cette fonction est appelée au démarrage de l'app angular
 // pour configurer les services utilisés
-app.config(function (imageServiceProvider,
+app.config(function (
+    $httpProvider,
+    imageServiceProvider,
     tagServiceProvider,
     licenseAndSourceServiceProvider,
     serverUrl,
@@ -26,4 +28,7 @@ app.config(function (imageServiceProvider,
     licenseAndSourceServiceProvider.setLicenseServiceUrl(serverUrl + licenseUrl);
     licenseAndSourceServiceProvider.setAssetSourceServiceUrl(serverUrl + assetSourceUrl);
     tagServiceProvider.setServiceUrl(serverUrl + tagUrl);
+
+
+    $httpProvider.withCredentials = true;
 });
