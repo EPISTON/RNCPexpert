@@ -1,0 +1,68 @@
+
+rootController
+		|
+		+------------> menu général -> 2 choix (images ou login)
+									-> via des routes
+					images
+						|
+						+-----> imageController + tagController
+					
+					login
+						|
+						+-----> loginController
+
+requete authorisation basic
+	login et password
+	
+	login:password --> base64 ---> transmit
+	
+------------------------------------------------------------------
+Angular							|		serveur java
+								|
+requette http /user --> GET	-----------> authentification
+											|
+										session (principal)
+											|
+										renvoie jeton csrf (12345)
+											|
+										stocke jeton dans la session
+	<---------------------------------------+
+requette Get /rest/images
+		|(JSessionID)
+		+------------------------------> retrouve session
+											| authentifié via session
+											|
+	<---------------------------------------+
+requette Post /rest/tags
+		|(JSESSIONID) + _csrf=12345
+		+-------------------------------> retrouve la session
+											| authentifié via la session
+											+ POST !!! protection csrf activée
+											| retrouve le jeton dans la session
+											| jetonoriginal = 12345 (session)
+											| jeton csrf = 12345
+											+ -> les deux jetons sont identiques
+											| tout va bien
+	<---------------------------------------+
+
+ici, nous ne regenerons pas le jeton a chaque requette
+	cela ce configure (soit renouvellement constant, ou timeout)
+
+les complications
+		Angular et spring security n'utilise pas par défaut les mêmes
+		nom/cokkie/header pour le jeton csrf
+			-> xsrf (angular) (par cookie de préference)
+			-> csrf (spring security) (passer par header ou parametre)
+	1) un filtre pour cibler les url qu'on veut proteger
+	2) une double traduction entre le standard angular et spring security
+		-> changer le nom du header cote spring security
+		-> copier le jeton dans un cookie
+		cote angular
+			-> ou trouver le jeton
+			-> ou l'indiquer dans la requette pour que spring security
+			le retrouve
+	
+	
+
+	
+	
