@@ -1,0 +1,22 @@
+qualimetrie/qualite logicielle
+------------------------------
+1) la mesure de la la qualite du logicielle via divers indicateurs
+2) augmenter cette qualité vie des méthodes et outils
+
+exemple d'indicateurs
+	-> couverture de code
+		% de code tester via des tests autiomatiques
+		--> outils automatiques pour cela
+	-> analyse statique de code
+		-> fuite mémoire/ressource, mausvaise construction syntaxique
+	-> outils de profilage/test de charge
+
+exemple de techniques et outils
+	-> methodologie architecture conception (MDA)
+	-> methodologies type agile ou autre
+	-> outils techniques
+		-> framework de test unitaires
+		-> test fonctionnels et/ou integration
+		-> intégration continue (jenkins par exemple)
+
+		
