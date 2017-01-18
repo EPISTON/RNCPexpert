@@ -2,7 +2,14 @@
  *  giga galerie angular app
  */
 
-var app = angular.module("galerieApp", ["ui.bootstrap", "ngFileUpload", "ngCookies", "bootstrapLightbox", "ngSanitize", "angular.filter"]);
+var app = angular.module("galerieApp",
+                 ["ui.bootstrap",
+                  "ngFileUpload",
+                  "ngCookies",
+                  "bootstrapLightbox",
+                  "ngSanitize",
+                  "angular.filter",
+                  "ngRoute"]);
 
 app.constant("serverUrl", "http://localhost:8080/gigaMvcGalerie")
     .constant("imageUrl", "/rest/images")
@@ -14,6 +21,7 @@ app.constant("serverUrl", "http://localhost:8080/gigaMvcGalerie")
 // pour configurer les services utilisés
 app.config(function (
     $httpProvider,
+    $routeProvider,         // injection pour configuration des routes
     imageServiceProvider,
     tagServiceProvider,
     licenseAndSourceServiceProvider,
@@ -23,12 +31,26 @@ app.config(function (
     assetSourceUrl,
     tagUrl) {
 
+    $routeProvider.when("/login" , {
+        templateUrl: "views/loginPanel.html"
+    });
+    $routeProvider.when("/images" , {
+        templateUrl: "views/imagePanel.html"
+    });
+    $routeProvider.otherwise({
+        templateUrl: "views/loginPanel.html"
+    });
+
 
     imageServiceProvider.setServiceUrl(serverUrl + imageUrl);
     licenseAndSourceServiceProvider.setLicenseServiceUrl(serverUrl + licenseUrl);
     licenseAndSourceServiceProvider.setAssetSourceServiceUrl(serverUrl + assetSourceUrl);
     tagServiceProvider.setServiceUrl(serverUrl + tagUrl);
 
-
-    $httpProvider.withCredentials = true;
+    // dans toutes les requette envoyées avec $http
+    // ajouter cet header qui empechera l'utilisation, entre autre
+    // des formulaires d'authentification automatiques (on est en ajax)
+    $httpProvider.defaults.headers.common["X-Requested-With"] = 'XMLHttpRequest';
+    // transmettre les infos d'authentification avec la requette
+    $httpProvider.defaults.withCredentials = true;
 });

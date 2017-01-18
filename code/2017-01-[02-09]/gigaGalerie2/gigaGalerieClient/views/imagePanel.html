@@ -1,0 +1,19 @@
+ <div id="wrapper" ng-controller="imageRootController">
+        <div id="sidebar-wrapper">
+            <ul class="sidebar-nav">
+                <li class="sidebar-brand sidebar-li">MAIN SECTIONS</li>
+                <li ng-class="{'active': isImageNav(0)}" class="sidebar-li"><a href="" ng-click="setImageNav(0)"><span class="glyphicon glyphicon-th" aria-hidden="true"> Images</a></li>
+                <li ng-class="{'active': isImageNav(1)}" class="sidebar-li"><a href="" ng-click="setImageNav(1)"><span class="glyphicon glyphicon-cloud-upload" aria-hidden="true"> Upload</a></li>
+                <li ng-class="{'active': isImageNav(2)}" class="sidebar-li"><a href="" ng-click="setImageNav(2)"><span class="glyphicon glyphicon-pushpin" aria-hidden="true"> Staging</a></li>
+                <ng-include src="secondNavigation" />
+            </ul>
+
+        </div>
+        <div id="page-content-wrapper">
+            <div class="page-content">
+                <br />
+                <br />
+                <div class="container-fluid" ng-include="mainImagePanel" />
+            </div>
+        </div>
+</div>

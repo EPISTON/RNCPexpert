@@ -26,26 +26,31 @@
     <script src="js/services/licenseAndSourceService.js"></script>
     <script src="js/controllers/imageControllers.js"></script>
     <script src="js/controllers/tagControllers.js"></script>
+    <script src="js/controllers/loginControllers.js"></script>
 </head>
 
 <body ng-app="galerieApp">
-    <div id="wrapper" ng-controller="imageRootController">
-        <div id="sidebar-wrapper">
-            <ul class="sidebar-nav">
-                <li class="sidebar-brand sidebar-li">MAIN SECTIONS</li>
-                <li ng-class="{'active': isImageNav(0)}" class="sidebar-li"><a href="" ng-click="setImageNav(0)"><span class="glyphicon glyphicon-th" aria-hidden="true"> Images</a></li>
-                <li ng-class="{'active': isImageNav(1)}" class="sidebar-li"><a href="" ng-click="setImageNav(1)"><span class="glyphicon glyphicon-cloud-upload" aria-hidden="true"> Upload</a></li>
-                <li ng-class="{'active': isImageNav(2)}" class="sidebar-li"><a href="" ng-click="setImageNav(2)"><span class="glyphicon glyphicon-pushpin" aria-hidden="true"> Staging</a></li>
-                <ng-include src="secondNavigation" />
-            </ul>
-
-        </div>
-        <div id="page-content-wrapper">
-            <div class="page-content">
-                <div class="container-fluid" ng-include="mainImagePanel" />
+    <nav class="navbar navbar-inverse navbar-fixed-top">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="#">Super CMS</a>
+            </div>
+            <div id="navbar" class="navbar-collapse collapse">
+                <ul class="nav navbar-nav">
+                    <li class="active"><a href="#/">Home</a></li>
+                    <li><a href="#/images">images</a></li>
+                    <li><a href="#/login">Login</a></li>
+                 </ul>
             </div>
         </div>
-    </div>
+    </nav>
+   <ng-view />
 </body>
 
 </html>
