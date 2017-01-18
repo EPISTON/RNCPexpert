@@ -38,8 +38,8 @@ public class CsrfGrantingFilter implements Filter {
 		log.info("tokenA = " + token);
 		
 		if (token != null 
-			&& ((HttpServletRequest)request).getRequestURI()
-											.equals("gigaMvcGalerie/user")) {
+			/*&& ((HttpServletRequest)request).getRequestURI()
+											.equals("/gigaMvcGalerie/user")*/) {
 			Cookie cookie = new Cookie("X-XSRF-TOKEN", token);
 			cookie.setPath("/");
 			((HttpServletResponse)response).addCookie(cookie);

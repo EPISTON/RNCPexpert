@@ -53,16 +53,19 @@ angular.module("galerieApp")
                     return $http.get(serviceUrl + "/" + id);
                 },
                 "saveOne": function (image, licenseId, sourceId) {
+                    var token = $cookies.get('X-XSRF-TOKEN');
                     var url = serviceUrl + "/save/" + licenseId + "/" + sourceId;
-                    return $http.post(url, image);
+                    return $http.post(url + "?_csrf=" + token, image);
                 },
                 "saveOneAndUnstage": function (image, licenseId, sourceId) {
+                    var token = $cookies.get('X-XSRF-TOKEN');
                     var url = serviceUrl + "/saveunstage/" + licenseId + "/" + sourceId;
-                    return $http.post(url, image);
+                    return $http.post(url + "?_csrf=" + token, image);
                 },
                 "removeImages": function (ids) {
+                    var token = $cookies.get('X-XSRF-TOKEN');
                     var url = serviceUrl + "/delete/" + ids.join();
-                    return $http.delete(url);
+                    return $http.delete(url + "?_csrf=" + token);
                 },
                 "getImgLink": function (id) {
                     return serviceUrl + "/data/" + id;
@@ -71,10 +74,11 @@ angular.module("galerieApp")
                     return serviceUrl + "/thumbdata/" + id;
                 },
                 "upload": function (file, license, assetSource, tags) {
+                    var token = $cookies.get('X-XSRF-TOKEN');
                     if (!file.$error) {
                         var p = {};
                         var uploadUrl = serviceUrl + "/data?licenseId=" + license.id
-                            + "&sourceId=" + assetSource.id;
+                            + "&sourceId=" + assetSource.id + "&_csrf=" + token;
                         if (tags.length > 0) {
                             uploadUrl += "&tagsId=";
                             for (var i = 0; i < tags.length; i++) {

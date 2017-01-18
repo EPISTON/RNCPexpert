@@ -82,21 +82,26 @@ angular.module("galerieApp")
                     return $http.get(serviceUrl + "/" + id);
                 },
                 "saveOne": function (tag) {
-                    return $http.post(serviceUrl, tag);
+                    var token = $cookies.get('X-XSRF-TOKEN');
+                    return $http.post(serviceUrl + "?_csrf=" + token, tag);
                 },
                 "multiAssetAddTag": function (tagId, assetsId) {
-                    return $http.post(serviceUrl + "/add/" + assetsId.join() + "/" + tagId, {})
+                    var token = $cookies.get('X-XSRF-TOKEN');
+                    return $http.post(serviceUrl + "/add/" + assetsId.join() + "/" + tagId + "?_csrf=" + token, {})
                 },
                 "multiAssetRemoveTag": function (tagId, assetsId) {
-                    return $http.post(serviceUrl + "/remove/" + assetsId.join() + "/" + tagId, {})
+                    var token = $cookies.get('X-XSRF-TOKEN');
+                    return $http.post(serviceUrl + "/remove/" + assetsId.join() + "/" + tagId + "?_csrf=" + token, {})
                 },
                 "multiAssetUnstage": function (assetsId) {
-                    return $http.post(serviceUrl + "/unstage/" + assetsId.join(), {})
+                    var token = $cookies.get('X-XSRF-TOKEN');
+                    return $http.post(serviceUrl + "/unstage/" + assetsId.join() + "?_csrf=" + token, {})
                 },
                 "addTag": function (tag) {
+                    var token = $cookies.get('X-XSRF-TOKEN');
                     var self = this;
                     if (tagMode === "edit" && currentAssetId !== 0) {
-                        $http.post(serviceUrl + "/add/" + currentAssetId + "/" + tag.id, {})
+                        $http.post(serviceUrl + "/add/" + currentAssetId + "/" + tag.id + "?_csrf=" + token, {})
                             .then(function (response) {
                                 $rootScope.$broadcast("tagService:tagAdded", { 'tag': response.data });
                                 self.refreshSelected();
@@ -118,9 +123,10 @@ angular.module("galerieApp")
                     }
                 },
                 "removeTag": function (tag) {
+                    var token = $cookies.get('X-XSRF-TOKEN');
                     var self = this;
                     if (tagMode === "edit" && currentAssetId !== 0) {
-                        $http.post(serviceUrl + "/remove/" + currentAssetId + "/" + tag.id, {})
+                        $http.post(serviceUrl + "/remove/" + currentAssetId + "/" + tag.id + "?_csrf=" + token, {})
                             .then(function (response) {
                                 $rootScope.$broadcast("tagService:tagRemoved", { 'tag': response.data });
                                 self.refreshSelected();

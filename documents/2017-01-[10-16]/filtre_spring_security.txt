@@ -1,0 +1,20 @@
+liste exemple des filtres spring security
+
+
+'BasicUserApprovalFilter'
+'SecurityContextPersistenceFilter'
+'LogoutFilter'
+'UsernamePasswordAuthenticationFilter'
+'BasicAuthenticationFilter'
+'RequestCacheAwareFilter'
+'SecurityContextHolderAwareRequestFilter'
+'RememberMeAuthenticationFilter'
+'ForgotPasswordAuthenticationFilter'
+'AnonymousAuthenticationFilter'
+'SessionManagementFilter'
+'ExceptionTranslationFilter'
+'OAuth2ExceptionHandlerFilter'
+'VerificationCodeFilter'
+'OAuth2AuthorizationFilter'
+'OAuth2ProtectedResourceFilter'
+'FilterSecurityInterceptor'

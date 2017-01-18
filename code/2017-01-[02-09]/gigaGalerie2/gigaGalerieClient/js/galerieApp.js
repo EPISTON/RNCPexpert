@@ -51,6 +51,8 @@ app.config(function (
     // ajouter cet header qui empechera l'utilisation, entre autre
     // des formulaires d'authentification automatiques (on est en ajax)
     $httpProvider.defaults.headers.common["X-Requested-With"] = 'XMLHttpRequest';
+    $httpProvider.defaults.xsrfHeaderName = 'X-XSRF-TOKEN';
+    $httpProvider.defaults.xsrfCookieName = 'X-XSRF-TOKEN';
     // transmettre les infos d'authentification avec la requette
     $httpProvider.defaults.withCredentials = true;
 });
