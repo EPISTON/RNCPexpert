@@ -1,0 +1,46 @@
+Exercice Junit 4.9  1
+-----------------
+le projet a creer a partir de l'archetype de base
+sans spring
+
+Produit
+-------
+id		int
+nom		String
+prix	double
+poids	double
+stock	int
+
+
+serie de test unitaire pour verifier le fonctionnement
+de l'objet Produit
+id >= 0
+nom fait entre 3 et 50 caracteres, et doit declencher une exception
+invalideProductName en cas de non respect de cette contrainte
+
+prix >= 0 et < 10000
+invalidproductPrice en cas de non respect de cette contrainte
+
+poids >= 0.01 et < 50.0
+invalidproductWeight en cas de non respect de cette contrainte
+
+stock ne peut etre négatif
+invalidStockValue en cas de non respect de cette contrainte
+
+deuxieme partie
+----------------
+-> liste de produit en mémoire (methode setAllProduits)
+
+ProduitService
+listerProduits() -> liste des produits totale
+listerProduitsDisponnibles() -> liste des produits dont le stock est > 0
+saveProduit() -> une exception InvalidProduct si le produit n'est pas valide
+listeProduitPrix(prixMin, prixMax) -> produits dans cette interval de prix
+
+
+
+
+
+
+
+
