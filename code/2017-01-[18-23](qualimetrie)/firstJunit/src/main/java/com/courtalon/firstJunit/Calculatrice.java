@@ -21,4 +21,9 @@ public class Calculatrice {
 		return x + y;
 	}
 	
+	public double calculRacine(double d) {
+		return Math.sqrt(d);
+	}
+	
+	
 }

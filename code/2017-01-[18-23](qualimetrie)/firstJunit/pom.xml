@@ -18,7 +18,7 @@
     <dependency>
             <groupId>junit</groupId>
             <artifactId>junit</artifactId>
-            <version>4.5</version>
+            <version>4.9</version>
             <scope>test</scope>
     </dependency>
 
@@ -34,7 +34,13 @@
                     <source>1.8</source>
                     <target>1.8</target>
                 </configuration>
-            </plugin>
-  	</plugins>
+        </plugin>
+        <plugin>
+        	<artifactId>maven-surefire-plugin</artifactId>
+        	<configuration>
+        		<groups>com.courtalon.firstJunit.SlowTests</groups>
+        	</configuration>
+        </plugin>
+    </plugins>
   </build>
 </project>
