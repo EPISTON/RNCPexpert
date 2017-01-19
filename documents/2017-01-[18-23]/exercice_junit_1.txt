@@ -34,7 +34,7 @@ deuxieme partie
 ProduitService
 listerProduits() -> liste des produits totale
 listerProduitsDisponnibles() -> liste des produits dont le stock est > 0
-saveProduit() -> une exception InvalidProduct si le produit n'est pas valide
+saveProduit(id, nom, prix, poids, stock) -> une exception InvalidProduct si le produit n'est pas valide
 listeProduitPrix(prixMin, prixMax) -> produits dans cette interval de prix
 
 
