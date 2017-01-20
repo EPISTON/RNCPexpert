@@ -1,0 +1,9 @@
+pour generer une interface a partir d'une classe (sous eclipse)
+
+se placer dans le fichier source de la classe
+menu "refactor" -> extract Interface
+	-> choisir le nom de l'interface, et cocher les methodes a extraire
+	
+	OK
+	
+et c'est FAIT!

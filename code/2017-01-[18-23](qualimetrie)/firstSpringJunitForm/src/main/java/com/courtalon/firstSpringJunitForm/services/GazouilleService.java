@@ -1,5 +1,9 @@
 package com.courtalon.firstSpringJunitForm.services;
 
+import java.util.List;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -17,10 +21,22 @@ public class GazouilleService {
 
 
 	public Message publish(Message m) {
-		m.setTitre(m.getTitre().replaceAll(CENSORED, "gazouille"));
-		m.setCorps(m.getCorps().replaceAll(CENSORED, "gazouille"));
+		Pattern p = Pattern.compile(CENSORED, Pattern.CASE_INSENSITIVE);
+		m.setTitre(p.matcher(m.getTitre()).replaceAll("gazouille"));
+		m.setCorps(p.matcher(m.getCorps()).replaceAll("gazouille"));
 		getMessageDao().save(m);
 		return m;
+	}
+	
+	public Message readGazouille(int id) {
+		Message m = getMessageDao().findById(id);
+		if (m == null)
+			throw new GazouilleNotFound();
+		return m;
+	}
+	
+	public List<Message> readAllGazouilles() {
+		return getMessageDao().findAll();
 	}
 	
 	

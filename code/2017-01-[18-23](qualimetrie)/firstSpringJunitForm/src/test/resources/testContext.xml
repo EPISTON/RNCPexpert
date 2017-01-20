@@ -20,9 +20,29 @@
 			http://www.springframework.org/schema/mvc/spring-mvc-4.0.xsd"
 			default-autowire="byName">
 
-<bean id="msg1" class="com.courtalon.firstSpringJunitForm.beans.Message">
-	<property name="titre" value="hello!" />
-	<property name="corps" value="bienvenue dans le monde de spring!"/>
+<context:component-scan base-package="com.courtalon.firstSpringJunitForm.services" />
+
+<bean id="messageDao" 
+	class="com.courtalon.firstSpringJunitForm.test.repositories.MessageDaoMock" >
+	<property name="sampleMessages">
+		<list>
+			<bean class="com.courtalon.firstSpringJunitForm.beans.Message">
+				<property name="id" value="1" />
+				<property name="titre" value="gazouille 1" />
+				<property name="corps" value="lorem 1" />
+			</bean>
+			<bean class="com.courtalon.firstSpringJunitForm.beans.Message">
+				<property name="id" value="2" />
+				<property name="titre" value="gazouille 2" />
+				<property name="corps" value="lorem 2" />
+			</bean>
+			<bean class="com.courtalon.firstSpringJunitForm.beans.Message">
+				<property name="id" value="3" />
+				<property name="titre" value="gazouille 3" />
+				<property name="corps" value="lorem 3" />
+			</bean>
+		</list>
+	</property>
 </bean>
 
 
