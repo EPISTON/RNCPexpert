@@ -20,11 +20,7 @@
 			http://www.springframework.org/schema/mvc/spring-mvc-4.0.xsd"
 			default-autowire="byName">
 
-<bean id="msg1" class="com.courtalon.firstSpringJunitForm.beans.Message">
-	<property name="titre" value="bonjour" />
-	<property name="corps" value="bienvenue dans le monde de spring!"/>
-</bean>
-
+<context:component-scan base-package="com.courtalon.firstSpringJunitForm.services" />
 
 <bean id="dataSource" 
 	  class="org.springframework.jdbc.datasource.DriverManagerDataSource">
@@ -33,6 +29,14 @@
 	  <property name="username" value="root" />
 	  <property name="password" value="" />
 </bean>
+
+<bean id="jdbcTemplate"
+	  class="org.springframework.jdbc.core.JdbcTemplate" />
+
+<bean id="messageDao"
+	  class="com.courtalon.firstSpringJunitForm.repositories.MessageDaoImpl">
+</bean>
+	  
 
 
 </beans>

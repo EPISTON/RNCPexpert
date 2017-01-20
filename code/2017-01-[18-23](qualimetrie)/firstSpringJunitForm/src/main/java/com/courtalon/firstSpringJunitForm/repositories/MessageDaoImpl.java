@@ -10,7 +10,7 @@ import org.springframework.jdbc.core.RowMapper;
 
 import com.courtalon.firstSpringJunitForm.beans.Message;
 
-public class MessageDaoImpl implements RowMapper<Message>
+public class MessageDaoImpl implements RowMapper<Message>, MessageDao
 {
 	private static final String SELECT_ALL = "select * from message";
 	private static final String SELECT_BY_ID = "select * from message where id=?";
@@ -22,16 +22,28 @@ public class MessageDaoImpl implements RowMapper<Message>
 	public JdbcTemplate getJdbcTemplate() {return jdbcTemplate;}
 	public void setJdbcTemplate(JdbcTemplate jdbcTemplate) {this.jdbcTemplate = jdbcTemplate;}
 	
+	/* (non-Javadoc)
+	 * @see com.courtalon.firstSpringJunitForm.repositories.MessageDao#findAll()
+	 */
+	@Override
 	public List<Message> findAll() {
 		return getJdbcTemplate().query(SELECT_ALL, this);
 	}
 	
+	/* (non-Javadoc)
+	 * @see com.courtalon.firstSpringJunitForm.repositories.MessageDao#findById(int)
+	 */
+	@Override
 	public Message findById(int id) {
 		return getJdbcTemplate().queryForObject(SELECT_BY_ID, this, id);
 	}
 	
+	/* (non-Javadoc)
+	 * @see com.courtalon.firstSpringJunitForm.repositories.MessageDao#save(com.courtalon.firstSpringJunitForm.beans.Message)
+	 */
+	@Override
 	public int save(Message m) {
-		if (m.getId() > 0) {
+		if (m.getId() <= 0) {
 			return getJdbcTemplate().update(INSERT_ONE, m.getTitre(), m.getCorps());
 		}
 		else {
