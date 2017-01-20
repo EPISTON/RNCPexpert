@@ -1,0 +1,24 @@
+exercice junit 2
+-----------------
+
+On part du projet BoutiqueService(form)
+
+ecriture d'un service metier ProduitServiceMetier
+
+fourniture ProduitServiceMetier
+-------------------------------
+trouverProduit(int id) -> si non trouvé -> exception ProduitNotFound
+listerBestProduit() -> la liste de 5 premier produits
+chercherProduit(prixMin, prixMax) -> tous les produits dans cet interval
+sauverProduit(Produit p) -> sauver un produit (contrainte prix et poids > 0), non au moins 3 caracteres
+
+je veux pouvoir tester via Junit le fonctionnement de ce service
+sans base de donnée derrière
+
+
+1) ecrire le vrais service
+2) mettre en place l'environnement de test
+3) ecrire un faux(mock) jpaRepository pour pouvoir tester le service
+4) ecrire les tests
+
+
