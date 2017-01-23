@@ -1,0 +1,29 @@
+
+principales annotations spring
+------------------
+
+@Component (devant classe)
+	-> permet de déclarer un bean dans le context spring
+
+@Service, @Repository...
+	-> variant de @Component, suivant la destination du bean
+
+@Autowired (devant attribut)
+	-> demande a spring d'injecter un bean, en se basant par defaut
+sur le type de l'attribut. ne passe PAS par les getter/setter
+@Qualifier (en complement de @Autowired)
+	-> permet de préciser le nom du bean a injecter, en cas d'ambiguité
+
+@Controller
+	-> déclaration d'un controller spring MVC
+
+@RequestMapping, @responseBody, @Requestparam, @PathVariable, @Pageable, etc..
+annotations utilisées par spring MVC
+
+@Configure
+	-> declarer une classe de configuration de spring (comme par exemple
+	pour la securité)
+@EnableWebSecurity
+	-> securité par méthode web
+
+	
