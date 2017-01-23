@@ -1,0 +1,6 @@
+reprendre l'exercice précedent (ProduitServiceMetier)
+
+dupliquer le fichier de configuration de test et la classe de test
+refaire l'intégralité (et plus, verification appel du repository)
+ en utilisant Mockito pour simplifier le code
+
