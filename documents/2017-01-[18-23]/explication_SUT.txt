@@ -1,0 +1,47 @@
+1) dummy
+2) stub
+3) mock
+4) test spy
+
+ MessageService -> transmettre des messages a une liste de recepteur
+	sendMessage(Template, message)
+	{
+		message = TemplateService.format(template, message);
+		boolean ok = mailService.send(message);
+		return ok;
+	}
+
+message pourrait etre un dummy
+	un objet "vide"
+TemplateService Stub car il renvoie une donnée nécéssaire
+ au service testé
+TemplateService et mailService serait aussi des mock, car
+on veut verifier qu'ils ont bien appelé par la fonction testée
+ 
+	
+				SUT (system under test)
+			+---------------------------+
+			|							|
+dummy -->	|	classes et systeme		|---> mock
+			|	a tester				|
+stub  -->	|							|---> test Spy
+			|							|
+			|							|
+			|							|
+			|							|
+			+---------------------------+
+
+
+
+
+Message("bonjour monde", "et bienvenue")
+
+--> appel de messageService()
+
+Message --> templateService --> Message("bonsoir monde", "et bienvenue")
+mailService( Message("bonsoir monde", "et bienvenue")) --> true
+
+renvoie true;
+
+
+

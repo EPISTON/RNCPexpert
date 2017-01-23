@@ -1,0 +1,6 @@
+au lieu de creer les repertoires manuellement dans src/test/java
+copy qualified name d'un des package de src/main/java
+creer package (dans la vue package) dans src/test/java
+en chageant le package comme voulu
+
+eclipse cree tous les répertoires du package
