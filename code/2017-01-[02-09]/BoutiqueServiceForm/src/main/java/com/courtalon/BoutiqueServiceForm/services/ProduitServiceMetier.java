@@ -21,10 +21,10 @@ public class ProduitServiceMetier {
 		List<Produit> bestProduits = new ArrayList<>();
 		int compteur = 0;
 		for (Produit p : allProduits) {
-			bestProduits.add(p);
 			compteur++;
 			if (compteur > 4)
 				break;
+			bestProduits.add(p);
 		}
 		return bestProduits;
 	}

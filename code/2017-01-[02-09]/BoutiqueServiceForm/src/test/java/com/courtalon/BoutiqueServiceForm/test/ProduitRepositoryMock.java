@@ -1,5 +1,8 @@
 package com.courtalon.BoutiqueServiceForm.test;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
@@ -8,6 +11,14 @@ import com.courtalon.BoutiqueServiceForm.metier.Produit;
 import com.courtalon.BoutiqueServiceForm.repositories.ProduitRepository;
 
 public class ProduitRepositoryMock implements ProduitRepository {
+
+	private List<Produit> produits;
+	public List<Produit> getProduits() {
+		return produits;
+	}
+	public void setProduits(List<Produit> produits) {
+		this.produits = produits;
+	}
 
 	@Override
 	public Iterable<Produit> findAll(Sort arg0) {
@@ -66,8 +77,7 @@ public class ProduitRepositoryMock implements ProduitRepository {
 	
 	@Override
 	public Iterable<Produit> findAll() {
-		// TODO Auto-generated method stub
-		return null;
+		return new ArrayList<>(produits);
 	}
 
 	@Override
@@ -84,8 +94,11 @@ public class ProduitRepositoryMock implements ProduitRepository {
 	 */
 
 	@Override
-	public Produit findOne(Integer arg0) {
-		// TODO Auto-generated method stub
+	public Produit findOne(Integer id) {
+		for (Produit p : produits) {
+			if (p.getId() == id)
+				return p;
+		}
 		return null;
 	}
 
@@ -97,8 +110,27 @@ public class ProduitRepositoryMock implements ProduitRepository {
 	 */
 
 	@Override
-	public <S extends Produit> S save(S arg0) {
-		return arg0;
+	public <S extends Produit> S save(S p) {
+		if (p.getId() > 0) {
+			// simulation d'un update
+			for (int i = 0; i < produits.size(); i++) {
+				if (produits.get(i).getId() == p.getId()) {
+					produits.set(i, p);
+					return p;
+				}
+			}
+			throw new IllegalArgumentException("produit a mettre a jour inexistant");
+		}
+		else {
+			// simulation d'un insert
+			int maxId = 0;
+			for (Produit p2 : produits) {
+				maxId = Math.max(maxId, p2.getId());
+			}
+			p.setId(maxId);
+			produits.add(p);
+			return p;
+		}
 	}
 
 	@Override
