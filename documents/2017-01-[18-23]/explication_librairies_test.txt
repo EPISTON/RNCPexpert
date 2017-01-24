@@ -1,0 +1,17 @@
+dans ce qu'on utilise pour les test unitaires
+
+environnement spring
+
+	1) JUnit -> framework de test unitaires (@Before, @Test, assertEquals)
+	2) Mockito -> de creer facilement des Mock (faux objets, stub, bouchon)
+				et de verifier les appels sur ceux-ci
+	3) Hamcrest -> extension des assertions et tests de JUnit
+	4) spring test -> fonctionnalite de test dédiée a l'environnement spring
+		comme -> SpringJunit4Runner
+		permet d'executer des tests unitaire en bénéficiant de l'environnement
+		spring (autowired, bean, fichier de configuration, etc...)
+		il apporte aussi des classe utilitaires pour le test
+		des controller mvc -> mockMvc
+		
+	
+

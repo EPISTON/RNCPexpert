@@ -1,0 +1,65 @@
+mise en place des test springMvc dans un projet
+
+	1) 
+	changer la dependance a servlet api pour passer
+	en version 3 minimum: attention, avec tomcat8, ne pas
+	utiliser le scope provided
+	
+		<dependency>
+		    <groupId>javax.servlet</groupId>
+		    <artifactId>javax.servlet-api</artifactId>
+		    <version>3.1.0</version>
+		</dependency>
+		
+	2)
+	verfier les dependances dans le pom
+	
+	on a besoin de junit 4.9 minimum
+	on a besoin de spring-test
+	
+	on a besoind de hamcrest (pour le json)
+	<dependency>
+		    <groupId>org.hamcrest</groupId>
+		    <artifactId>hamcrest-all</artifactId>
+		    <version>1.3</version>
+	</dependency>
+	
+	si on veut utiliser	les mock (normaux)
+	on a besoin de mockito
+	<dependency>
+		    <groupId>org.mockito</groupId>
+		    <artifactId>mockito-all</artifactId>
+		    <version>1.10.19</version>
+	</dependency>
+	
+	si on veut utiliser la validation des chemin json (JsonPath)
+	<dependency>
+		    <groupId>com.jayway.jsonpath</groupId>
+		    <artifactId>json-path</artifactId>
+		    <version>2.2.0</version>
+	</dependency>
+	
+	3)
+	on a besoin dans la configuration de test (le fichier xml)
+	de la configuration mvc (copier coller depuis spring-mvc-servlet.xml)
+	
+	4)
+	on a besoin d'importer en static
+	A)
+		les assertions Junit
+		import static org.junit.Assert.*;
+	B)
+		les methodes de mockito
+		import static org.mockito.Mockito.*;
+	C)
+		les methodes hamcrest (json)
+		import static org.hamcrest.Matchers.*;
+	D)
+		des methodes de mockMvc de spring
+		import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
+		import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
+
+	5)
+		configurer correctement vos stub (en utilisant @Bean et @Primary si necessaire)
+		n'oubliez pas de reset les mock (ceux de mockito) si vous les reutiliser a chaque test
+		
