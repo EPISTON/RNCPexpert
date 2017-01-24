@@ -1,0 +1,12 @@
+mettre en place des test unitaires sur nos controlleurs
+spring-mvc de l'api rest de gigaGalerie (serveur)
+
+1) mettre en place ces tests de validation
+	sur l'API rest pour les license et les assetSources
+2) mettre en place les tests de validation
+	sur l'api Rest de tagging
+		-> tagger du contenu (addTag, removeTag, saveTag, listeTag)
+3) mettre en place les tests de validation
+	sur l'API rest des images
+		en excluant l'aspect binaire (uplaod/download)
+		
