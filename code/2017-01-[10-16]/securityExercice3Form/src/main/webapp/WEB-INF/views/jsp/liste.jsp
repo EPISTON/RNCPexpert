@@ -34,15 +34,13 @@
 		<td>${p.published}</td>
 		<td>${p.auteur.nom}</td>
 		<td>
-			<sec:authorize access="hasRole('ADMIN')" >
-				<a href="${editUrl}${p.id}">editer</a><br />
-				
-				<form method="post" action="${removeUrl}${p.id}">
-					<input type="submit"
-							value="supprimer"
-							onclick="return confirm('etes vous sur?');" />
-				</form> 
-			</sec:authorize>
+			<a href="${editUrl}${p.id}">editer</a><br />
+			
+			<sf:form method="post" action="${removeUrl}${p.id}">
+				<input type="submit"
+						value="supprimer"
+						onclick="return confirm('etes vous sur?');" />
+			</sf:form> 
 			</td>
 	</tr>
 	</c:forEach>
