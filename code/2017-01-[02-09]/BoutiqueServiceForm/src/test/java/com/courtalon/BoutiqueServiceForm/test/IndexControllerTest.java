@@ -10,11 +10,14 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.ImportResource;
 import org.springframework.context.annotation.Primary;
+import org.springframework.data.web.PageableHandlerMethodArgumentResolver;
+import org.springframework.http.converter.json.MappingJackson2HttpMessageConverter;
 import org.springframework.mock.web.MockHttpSession;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.web.WebAppConfiguration;
 import org.springframework.test.web.servlet.MockMvc;
+import org.springframework.test.web.servlet.MvcResult;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 
 import com.courtalon.BoutiqueServiceForm.metier.Produit;
@@ -65,6 +68,9 @@ public class IndexControllerTest {
 	@Before
 	public void setupMock() {
 		mockindexController = MockMvcBuilders.standaloneSetup(indexController)
+											 .setCustomArgumentResolvers(new PageableHandlerMethodArgumentResolver())
+											 .setMessageConverters(
+													 new MappingJackson2HttpMessageConverter())
 											 .build();
 		reset(produitRepositoryMock);
 	}
@@ -121,12 +127,14 @@ public class IndexControllerTest {
 		//-------------------------------------------
 		try {
 			
-			mockindexController
+			MvcResult mvr = mockindexController
 				.perform(get("/produit/liste"))
 				.andExpect(status().isOk())
 				.andExpect(content().contentType("application/json"))
 				.andExpect(jsonPath("$.content", hasSize(6)))
-				.andExpect(jsonPath("$.content[0].nom", is("biere oceania")));
+				.andExpect(jsonPath("$.content[0].nom", is("biere oceania")))
+				.andReturn();
+			System.out.println(mvr.getResponse().getContentAsString());
 		}
 		catch(Exception ex) {
 			fail("declenchement d'une exception au test " + ex.getMessage());

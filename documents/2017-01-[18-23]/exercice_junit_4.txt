@@ -10,3 +10,9 @@ spring-mvc de l'api rest de gigaGalerie (serveur)
 	sur l'API rest des images
 		en excluant l'aspect binaire (uplaod/download)
 		
+
+pour les Pageable
+quand on construit le mockMvc
+	appeler
+	setCustomArgumentResolvers(new PageableHandlerMethodArgumentResolver())
+	

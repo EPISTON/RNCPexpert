@@ -43,7 +43,24 @@ mise en place des test springMvc dans un projet
 	on a besoin dans la configuration de test (le fichier xml)
 	de la configuration mvc (copier coller depuis spring-mvc-servlet.xml)
 	
+	enlever la partie 
+		<mvc:annotation-driven>
+	qui servait a definir la gestion des Pageable et de la serialisation
+	Json
+	
+	nous le remplacerons pas l'equivalent en code dans le mock du controller
+	
+	
 	4)
+	prealable
+		-> creer le repertoire src/test/java
+		ensuite
+		creer un package dans la vue "package" dans src/test/java
+		qui contiendra nos classes de test (je garde le meme groupe et artifact)
+		mais je le met dans un sous package test (on peu si on veut organiser plus finement)
+	
+	dans notre classe de test
+	
 	on a besoin d'importer en static
 	A)
 		les assertions Junit
