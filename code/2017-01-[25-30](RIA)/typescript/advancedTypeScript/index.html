@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Mon premier typescript</title>
+        <link rel="stylesheet" href="css/styles.css" />
+        <script src="vendor/js/require.js"></script>
+        <script>
+            requirejs.config({
+                baseUrl: './app',
+                deps: ['app']
+            });
+            require(['app'], function(AppMain) {
+                var app = new AppMain();
+                app.run();
+            });
+        </script>
+    </head>
+    <body>
+        <h1>titre nouveau</h1>
+    </body>
+</html>
