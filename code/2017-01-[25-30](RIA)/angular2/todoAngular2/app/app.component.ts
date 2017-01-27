@@ -16,9 +16,9 @@ const taches : Tache[] = [
             <h2>liste des taches restantes</h2>
             <ul class="taches">
               <li *ngFor="let tache of taches">
-                <span class="badgeleft">{{tache.id}}</span>
+                <span class="badge bleft">{{tache.id}}</span>
                 {{tache.titre}}
-                <span class="badgeright">{{tache.priorite}}</span> 
+                <span class="badge bright">{{tache.priorite}}</span> 
               </li>
             </ul>
             `,
@@ -39,10 +39,9 @@ const taches : Tache[] = [
         height: 1.6em;
         border-radius: 4px;
       }
-      .taches .badgeleft {
+      .taches .badge {
         font-size: small;
         display: inline-block;
-        background-color: #607D8B;
         position: relative;
         line-height: 1em;
         padding: 0.8em 0.7em 0 0.7em;
@@ -50,21 +49,22 @@ const taches : Tache[] = [
         border-radius: 4px 4px 4px 4px;
         left: -1px;
         top: -4px;
+      }
+      .bleft {
+        background-color: #607D8B;
+        left: -1px;
         margin-right: .8em;
       }
-      .taches .badgeright {
-        font-size: small;
-        display: inline-block;
+      .bright {
+        float: right;
         background-color: red;
-        position: relative;
-        line-height: 1em;
-        padding: 0.8em 0.7em 0 0.7em;
-        height: 1.8em;
-        border-radius: 4px 4px 4px 4px;
-        right: -1px;
-        top: -4px;
-        margin-right: .8em;
       }
+      .taches li:hover {
+        border: solid 2px blue;
+      }
+      
+      
+      
     `]
 })
 export class AppComponent  {
