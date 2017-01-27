@@ -74,3 +74,18 @@ DOM(HTML) <---------------------------> Component
 		  <---[(ng-model)]="property"->
 
 <input [(ng-model)]="todo.titre" >
+
+
+------------------------------------------
+
+
++-------------------+		+------------------------+
+|  appComponent		|		| TacheDetailsComponent	 |
+|  					|		|
+|  					|		|
+|  					|		|
+| <tache-details	|-----> |  @Input() tache: Tache
+|    [tache]=...	|		|
+|  					|		|						 |
++-------------------+		+------------------------+		
+

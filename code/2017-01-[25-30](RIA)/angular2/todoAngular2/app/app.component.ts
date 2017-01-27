@@ -48,10 +48,7 @@ const taches : Tache[] = [
                 <span class="badge bright">{{tache.priorite}}</span> 
               </li>
             </ul>
-            <div *ngIf="selectedTache">
-              <label>titre: </label>
-              <input [(ngModel)]="selectedTache.titre" placeholder="titre" />
-            </div>
+            <tache-details [tache]="selectedTache"></tache-details>
             `,
   styles: [
     `
