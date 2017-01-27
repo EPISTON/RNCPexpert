@@ -1,0 +1,76 @@
+angular 2
+	-> les classes typescript et les décorateurs
+
+on déclare des classes, qu'on annote avec des decorateurs angular2
+pour configurer celle-ci / spécifier leur role
+
+1)
+une application angular2 a un module root
+	-> déclaré via @NgModule
+	-> avec une propriété bootstrap
+	
+on peut avoir d'autre module, mais sur des application simple
+un seul module suffit
+
+declarations -> view classe qui appartiennent a ce module
+					-> 3 types : composant, directives, pipes
+exports -> les declarations qui doivent etre visible de l'exterieur
+imports -> les modules et classes dont on a besoin dans nos template
+bootstrap -> point de démarrage (uniquement pour le module racine)
+providers -> services disponnible dans l'application
+
+attention!! -> un module angular2 n'est pas la même chose qu'un
+module javascript/typescript
+	module javascript/typescript -> un fichier source
+	module angular2 -> ensemble de service/composant/etc regroupé ensemble
+
+librairie angular2 -> sous forme de module a importer
+
+
+LES COMPOSANTS (component)
+
+classes annotée avec @Component
+	-> directive associée a un template html
+	-> un sélécteur
+
+c'est ce qui organise votre page html, les vues
+	-> chaque partie de votre page html est de la responsabilité
+	d'un component
+
+html-+
+	 |
+	 + AppComponent
+			| (template)
+			|
+			+----TitreComponent (template)
+			|
+			|
+			+----SaisieComponent
+			|		 |
+			|		 +----
+			|		 |
+			|		 +----
+			|
+			+----SaisieComponent
+			
+2 maniere de déclarer le template d'un component
+	template -> `html`
+	templateUrl -> addresse fichier html (moduleId/ base ou cherche le html)
+
+souvent aussi
+	providers -> service dont on se sert dans le composant
+	
+-----------------------------------
+Data Binding
+	
+DOM(HTML) <---------------------------> Component
+		  
+		  <--{{value}}----------------|
+
+		  <--[property]="value"-------|
+
+		  |----(event)="handler"------>
+		  
+		  <---[(ng-model)]="property"->
+
+<input [(ng-model)]="todo.titre" >

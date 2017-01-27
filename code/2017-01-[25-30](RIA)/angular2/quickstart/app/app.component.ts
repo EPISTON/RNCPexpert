@@ -16,7 +16,7 @@ class Todo {
 
 @Component({
   selector: 'my-app',
-  template: `<h1>{{titre}}</h1>
+  template: `<my-titre></my-titre>
             <p>
               {{message}}
             </p>
@@ -24,7 +24,6 @@ class Todo {
             `,
 })
 export class AppComponent  {
-   titre : string = "todoApp"
    message : string = 'bienvenue sur todoApp';
    tache: Todo = new Todo(1, "apprendre angular2", "formation", 4); 
 }
