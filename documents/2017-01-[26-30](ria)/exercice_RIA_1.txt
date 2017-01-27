@@ -1,0 +1,13 @@
+exercice
+---------------
+refaire la même chose que l'exemple avec des produits
+
+Produit
+id, nom, prix
+
+1) afficher une liste de produit
+2) pouvoir editer un produit
+bonus 3) gerer un "faux" panier
+
+
+
