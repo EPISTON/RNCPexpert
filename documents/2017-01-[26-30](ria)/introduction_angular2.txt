@@ -89,3 +89,33 @@ DOM(HTML) <---------------------------> Component
 |  					|		|						 |
 +-------------------+		+------------------------+		
 
+
+-------------------------------------------
+les services en angular2 sont une autre des pierres angulaires du framework
+
+les components se contente de gérer la vue, et ne doivent pas se charger
+de la logique ou de maintenir l'état/les données
+
+c'est du ressort des services
+
+creation d'un service
+
+creation d'un classe TacheService que l'on export
+décoration de cette classe avec le decorateur @Injectable
+ne pas oublier : import {Injectable} from '@angular/core';
+
+on veut injecter ce service dans notre composant
+	1) importer le classe du service
+	2) declarer le service comme providers dans @Component
+			@Component({
+		  providers: [TacheService],
+	3) declarer le parametre service dans le constructeur du composant
+	4) ne pas appeler le service depuis le constructeur
+		on peu par exemple l'appeler depuis ngOnInit, si
+		on a implémenté l'interface Oninit d'angular
+		
+	
+
+
+
+

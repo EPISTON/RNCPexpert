@@ -1,5 +1,6 @@
-import { Component , Input} from '@angular/core';
-import { Tache } from'./tache';
+import { Component , Input, OnInit} from '@angular/core';
+import { Tache } from './tache';
+import { TacheService } from './tache.service';
 
 
 /*
@@ -28,15 +29,10 @@ de la balise si la condition est fausse
 
 */
 
-const taches : Tache[] = [
-  new Tache(1, "apprendre angular2", "formation", 4),
-  new Tache(2, "assomer l'ouvrier", "environnement", 5),
-  new Tache(3, "voire hunger games", "culture", 1),
-  new Tache(4, "faire les courses", "maison", 3),
-  new Tache(5, "avancer sur le fil rouge", "formation", 3)
-];
+
 
 @Component({
+  providers: [TacheService],
   selector: 'my-app',
   template: `<h1>todoManager</h1>
             <h2>liste des taches restantes</h2>
@@ -92,19 +88,25 @@ const taches : Tache[] = [
       }
     `]
 })
-export class AppComponent  {
+export class AppComponent implements OnInit {
    taches: Tache[];
    selectedTache: Tache;
+   tacheService: TacheService;
 
-   constructor() {
-     this.taches = taches;
+   constructor(tacheService: TacheService) {
+     this.tacheService = tacheService;
+     this.taches = [];
      this.selectedTache = null;
+   }
+   ngOnInit() {
+     this.tacheService.getTaches()
+                      .then(taches => this.taches = taches);
    }
 
    onTacheSelect(id: number) {
      for (var i = 0; i < this.taches.length; i++) {
        if (this.taches[i].id == id) {
-         this.selectedTache = taches[i];
+         this.selectedTache = this.taches[i];
          return;
        }
      }
