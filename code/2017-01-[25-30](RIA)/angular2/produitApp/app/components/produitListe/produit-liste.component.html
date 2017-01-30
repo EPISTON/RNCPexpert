@@ -1,0 +1,43 @@
+<div class="row">
+    <div class="col-md-8">
+        <h2>liste produits </h2>
+        <table *ngIf="produits" class="table table-stripped">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>NOM</th>
+                    <th>prix</th>
+                    <th>actions</th>
+                </tr>
+            </thead>
+            <tr *ngFor="let produit of produits">
+                <td>
+                    {{produit.id}}
+                </td>
+                <td>
+                    {{produit.nom}}
+                </td>
+                <td>
+                    {{produit.prix | currency:'EUR'}}
+                </td>
+                <td>
+                    <a  href="#" 
+                        class="btn btn-primary btn-sm"
+                        (click)="editProduit(produit.id)" >details</a>
+                    <a  href="#" 
+                        class="btn btn-primary btn-sm"
+                        (click)="ajouterPanier(produit.id)" >ajouter au panier</a>
+                </td>
+            </tr>
+        </table>
+    </div>
+    <div class="col-md-4">
+        <produit-panier></produit-panier>
+    </div>
+</div>
+<div class="row">
+    <h2>details</h2>
+    <div class="well" *ngIf="editedProduit">
+        <produit-details  [produit]="editedProduit" ></produit-details>
+    </div>
+</div>

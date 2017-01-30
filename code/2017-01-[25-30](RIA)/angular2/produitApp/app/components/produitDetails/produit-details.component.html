@@ -1,0 +1,18 @@
+<form *ngIf="produit">
+    <div class="form-group">
+        <label for="nom">nom produit</label>
+        <input type="text"
+               class="form-control"
+               id="nom" name="nom"
+               placeholder="nom produit..."
+               [(ngModel)]="produit.nom" />
+    </div>
+    <div class="form-group">
+        <label for="prix">prix produit</label>
+        <input type="text"
+               class="form-control"
+                id="prix" name="prix"
+               placeholder="prix produit..."
+               [(ngModel)]="produit.prix" />
+    </div>
+</form>
