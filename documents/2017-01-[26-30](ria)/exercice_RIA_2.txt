@@ -1,0 +1,27 @@
+exercice angular2 2
+---------------------
+ecrire une application angular2
+qui permet d'editer/consulter un ensemble
+de site géographique
+---------
+
+Site
+------
+id
+nom
+rue
+ville
+pays
+
+Service qui permet de lister les sites
+	- lister, modifier/creer site
+une page d'accueil
+	-> rechercher un site (via son nom)
+	-> si pas de recherche, liste complete des sites
+-> on peut editer un site
+-> on peu supprimer/creer un site
+via un routage (pour l'edition) avec l'id du site
+-> vous pouvez ajouter un site a un itinéraire
+	-> itineraire est l'equivalent du panier
+
+
