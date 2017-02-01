@@ -1,0 +1,61 @@
+promesses:
+
+	-> celui qui fournit la promesse fournit un objet (la promesse)
+	qui appelera un callbacj de l'appelant (via then) quand les données
+	seront disponnibles
+	celui qui fournit la promesse "resoudera" celle-ci (via resolve)
+	et automatiquement, le then du consommateur de la promesse
+	sera appelé
+	
+	une promesse peut également être rejetée via un appel a reject
+	
+	probleme principal, c'est une promesse a utilisation unique (jetable)
+	Une fois résolue, la promesse n'a plus d'utilité
+	
+	pas assez puissant/adapté a un framework utilisant beaucoup
+	l'asynchrone entre composant
+	
+	-> introduction des observables
+	
+	communication asynchrone entre composants
+	
+	un objet, qui est en quelque sorte un canal de communication,
+	un flux/stream de donnée entre en emetteur et un receveur
+	
+	même principe de base asynchrone
+		mais, ce canal n'est pas terminé une fois la première
+		donnée transmise, on peut, par la suite, en transmettre
+		d'autres quand de nouvelles informations sont disponnibles
+	
+	promesse -> then (quand la donnée est présente) 1 fois
+	
+	observable -> suscribe (je m'abonne a l'observable)
+		-> chaque nouvelle données disponnibles
+		-> appel le callback du suscribe
+	du coté producteur
+		-> (plus resolve) -> next (fournir données suivante)
+		
+	unsuscribe, complete (terminer le flux)
+	
+	
+	
+	producteur --> next [observable] ---> suscribe(callcback pour chaque next)
+	
+	
+	---------------------------------------------
+	rxjs (librairie javascript d'observable)
+	subject -> objet de controle/generation d'un observable
+	
+	---------------------------------------------
+	
+	pour le panier, a chaque mise a jour, nous retransmettrons
+	le panier nouveau via l'observable a tout ceux qui l'on souscrit
+	
+	
+	
+	
+	
+	
+	
+	
+	

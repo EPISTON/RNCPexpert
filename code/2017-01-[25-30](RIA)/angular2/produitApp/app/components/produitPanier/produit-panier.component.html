@@ -1,1 +1,6 @@
 <h2>panier</h2>
+<ul>
+    <li *ngFor="let p of panier | async">
+        {{p.quantite}} - {{p.nom}} - {{p.prix}}
+    </li>
+</ul>

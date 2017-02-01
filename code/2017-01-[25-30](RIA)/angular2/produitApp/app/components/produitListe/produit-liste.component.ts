@@ -27,6 +27,9 @@ export class ProduitListeComponent implements OnInit
     }
 
     ngOnInit() {
+        // on récupere une promesse du service produit
+        // qui, quand on la résoudra, nous fournira la liste des
+        // produits, le callback du then est alors appelé 
         this.produitService.getProduits()
                             .then(produits => this.produits = produits);
     }
