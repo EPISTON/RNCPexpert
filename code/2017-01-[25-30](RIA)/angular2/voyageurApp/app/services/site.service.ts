@@ -1,29 +1,25 @@
 import {Injectable} from '@angular/core'
 import {Site} from '../metier/site';
 import {BehaviorSubject, Observable} from 'rxjs/Rx';
+import {Http, Response} from '@angular/http';
 
-const SAMPLE_SITE :Site[] = [
-    new Site(1, "edugroupe", "152 rue malakof", "paris", "france"),
-    new Site(2, "chateau fillon", "152 rue de la fortune", "Beauce", "france"),
-    new Site(3, "le crabe croustillant", "15 rue la gastro", "bikinibottom", "pacifique"),
-    new Site(4, "cap gemini", "5-7 avenue frederick", "surennes", "france"),
-    new Site(5, "holmes home", "221b baker street", "london", "england"),
-];
 
 @Injectable()
-export class SiteService {
+export class SiteService 
+{
 
     private _sites : Site[];
     private _siteObservableBuilder : BehaviorSubject<Site[]>;
     private _searchterm: string;
 
-    constructor() {
-        this._sites = SAMPLE_SITE;
+    constructor(private _http : Http) {
+        this._sites = [];
         this._searchterm = "";
         this._siteObservableBuilder = 
             new BehaviorSubject<Site[]>(this._sites);
     }
 
+   
     setSearch(searchterm: string) {
         this._searchterm = searchterm;
         if (this._searchterm === "") {
@@ -40,6 +36,15 @@ export class SiteService {
     }
 
     getSites() : Observable<Site[]> {
+         this._http.get('http://localhost:8080/siteApiForm/rest/sites')
+                  .do(r => console.log(r))  // debuggage, affichage
+                  .map((res: Response) => res.json()) // transformer ma reponse en json
+                  .subscribe(data => {
+                      // 1 , je sauve la liste des sites dans mon service
+                      this._sites = data;
+                      // 2, je pousse la nouvelle liste a ceux qui ecoute mon observable
+                      this._siteObservableBuilder.next(this._sites);
+                  });
         return this._siteObservableBuilder.asObservable();
     }
 
