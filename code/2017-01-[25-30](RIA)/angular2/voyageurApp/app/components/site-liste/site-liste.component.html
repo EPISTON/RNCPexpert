@@ -1,0 +1,42 @@
+<div class="row">
+<div class="col-md-8">
+    <h2>liste des sites</h2>
+    <form>
+        <div class="from-group">
+            <label for="searchterm">rechercher</label>
+            <input type="text" class="form-control"
+                   name="searchterm" id="searchterm"
+                   [(ngModel)]="searchterm"
+                   (ngModelChange)="searchChanged($event)" />
+        </div>
+    </form>
+    <table class="table table-stripped">
+        <thead>
+            <tr>
+                <th>NOM</th>
+                <th>RUE</th>
+                <th>VILLE</th>
+                <th>PAYS</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tr *ngFor="let s of sites | async">
+            <td>{{s.nom}}</td>
+            <td>{{s.rue}}</td>
+            <td>{{s.ville}}</td>
+            <td>{{s.pays}}</td>
+            <td>
+                <a routerLink="/edit/{{s.id}}"
+                   class="btn btn-primary btn-sm">editer</a>
+                <a (click)="addSiteToItineraire(s.id)"
+                   class="btn btn-success btn-sm">ajouter</a>
+
+            </td>
+        </tr>
+    </table>
+</div>
+<div class="col-md-4">
+    <h2>itineraire</h2>
+    <itineraire></itineraire>
+</div>
+</div>

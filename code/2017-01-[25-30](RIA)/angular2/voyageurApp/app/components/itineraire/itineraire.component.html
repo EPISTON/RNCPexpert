@@ -1,0 +1,5 @@
+<ul *ngIf="sites">
+    <li *ngFor="let s of sites | async">
+        {{s.nom}} --  {{s.ville}} : puis, tournez a gauche
+    </li>
+</ul>

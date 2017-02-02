@@ -1,0 +1,31 @@
+<form *ngIf="editedSite">
+    <div class="form-group">
+        <label for="nom">nom site</label>
+        <input type="text"
+               class="form-control"
+               id="nom" name="nom"
+                [(ngModel)]="editedSite.nom" />
+    </div>
+    <div class="form-group">
+        <label for="rue">rue site</label>
+        <input type="text"
+               class="form-control"
+               id="rue" name="rue"
+                [(ngModel)]="editedSite.rue" />
+    </div>
+    <div class="form-group">
+        <label for="ville">ville site</label>
+        <input type="text"
+               class="form-control"
+               id="ville" name="ville"
+                [(ngModel)]="editedSite.ville" />
+    </div>
+    <div class="form-group">
+        <label for="pays">pays site</label>
+        <input type="text"
+               class="form-control"
+               id="pays" name="pays"
+               [(ngModel)]="editedSite.pays" />
+    </div>
+    <a routerLink="/liste" class="btn btn-lg btn-block btn-primary">back</a>
+</form>
