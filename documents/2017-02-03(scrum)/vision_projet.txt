@@ -1,0 +1,50 @@
+Le client veut deployer un site web
+permettant de personnaliser des cartes de visites
+en choisissant image de fond et texte  a afficher (avec placement)
+
+possibilité par la suite de personnaliser aussi d'autres objets (mug,
+ t-shirt, stylo, etc...)
+
+technologie choisie
+	- back-end rest en java + spring-data
+	- front end en angular 2
+	- si possible, prévisualisation carte de visite/mug/etc en 3D
+	dans le navigateur
+
+-----------------
+modele de données
+	- entites
+		- carte(id, nom, prenom, email, titre, adresse, telephone)
+		- image(id, nom, filename, content-type, size)
+		carte n]---[1 image
+		- styleCarte (id, nom, police, couleur, template)
+		carte n]---[1 styleCarte
+		- etiquette (id, label)
+		image n]---[n etiquette
+	- fonctionnalitée
+		- gerer les images et leur association aux cartes
+		- gerer la creation d'une carte
+		- avoir une interface complete de consultation de cartes
+		
+	- user_stories
+		- uploader une image
+		- tagger une image
+		- trouver une image
+		- creer nouvelle carte
+		- personnaliser/modifier une carte
+		- choisir un style pour unecarte
+		- choisir une image pour une carte
+		- sauvegarder une carte
+		- consulter les cartes
+		- visualiser en 3D une carte
+		- supprimer une carte
+		- supprimer une image
+		
+	- technical stories
+		- sauvegarde des images cote serveur
+		- mise en place de spring-data
+		- mise en place d'un/plusieurs controlleur rest
+		
+
+		
+		
